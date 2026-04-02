@@ -4,16 +4,18 @@ from contextlib import asynccontextmanager
 from app.core.config import settings
 from app.db.database import create_tables
 from app.api.routes import auth, health, chat
-
+from app.services.redis.redis_service import redis_service  # add import
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print(f"🚀 Starting {settings.APP_NAME} v{settings.APP_VERSION}")
     await create_tables()
     print("✅ Database tables created")
+    await redis_service.connect()          # ← add this
+    print("✅ Redis connected")
     yield
+    await redis_service.disconnect()       # ← add this
     print("👋 Shutting down...")
-
 
 app = FastAPI(
     title=settings.APP_NAME,

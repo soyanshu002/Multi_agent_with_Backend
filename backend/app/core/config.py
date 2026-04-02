@@ -82,6 +82,11 @@ class Settings(BaseSettings):
     PINECONE_API_KEY: str = ""
     PINECONE_INDEX_NAME: str = "chatbot"
     PINECONE_ENVIRONMENT: str = "us-east-1-aws"
+    # ── Embeddings ────────────────────────────────────
+    JINA_API_KEY: str = ""
+    EMBEDDING_PROVIDER: str = "jina"
+    EMBEDDING_MODEL: str = "jina-embeddings-v2-base-en"   # ← match your old working model
+    EMBEDDING_DIMENSION: int = 768                         # ← jina-v2 = 768 dims
 
     # ── Cloudinary ────────────────────────────────
     CLOUDINARY_CLOUD_NAME: str = ""
