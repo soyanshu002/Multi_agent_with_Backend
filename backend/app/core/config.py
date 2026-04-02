@@ -29,18 +29,17 @@ class Settings(BaseSettings):
 
     # All Available Groq Models (no key needed, just model names)
     GROQ_MODELS: list = [
-        "llama3-70b-8192",
-        "llama3-8b-8192",
-        "llama-3.1-70b-versatile",
-        "qwen/qwen3-70b-8192",  # from Qwen, available on Groq
-        "llama-3.1-8b-instant",
-        "openai/gpt-oss-120b",
-        "llama-3.2-11b-vision-preview",  # vision model
-        "llama-4-scout-17b-16e-instruct", # vision model
-        "mixtral-8x7b-32768",
-        "gemma2-9b-it",
-        "gemma-7b-it",
-    ]
+    "llama-3.3-70b-versatile",        # replaces llama3-70b-8192
+    "llama-3.1-70b-versatile",
+    "llama-3.1-8b-instant",
+    "llama3-8b-8192",
+    "qwen-qwen3-70b",
+    "llama-3.2-11b-vision-preview",   # vision model
+    "llama-4-scout-17b-16e-instruct", # vision model
+    "mixtral-8x7b-32768",
+    "gemma2-9b-it",
+    "gemma-7b-it",
+]
 
     # OpenAI Models
     OPENAI_API_KEY: str = ""
