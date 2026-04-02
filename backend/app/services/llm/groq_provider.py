@@ -5,21 +5,6 @@ from app.core.config import settings
 from typing import AsyncGenerator
 
 
-GROQ_MODELS = [
-    "llama3-70b-8192",
-    "llama3-8b-8192",
-    "llama-3.1-70b-versatile",
-    "qwen/qwen3-70b-8192",
-    "llama-3.1-8b-instant",
-    "openai/gpt-oss-120b",
-    "llama-3.2-11b-vision-preview",      # vision model
-    "llama-4-scout-17b-16e-instruct",    # vision model
-    "mixtral-8x7b-32768",
-    "gemma2-9b-it",
-    "gemma-7b-it",
-]
-
-
 class GroqProvider(BaseLLMProvider):
 
     def _build_messages(self, messages: list[dict]):
@@ -36,9 +21,10 @@ class GroqProvider(BaseLLMProvider):
     async def chat(
         self,
         messages: list[dict],
-        model: str = "llama3-70b-8192",
+        model: str = None,
         **kwargs
     ) -> str:
+        model = model or settings.DEFAULT_GROQ_MODEL
         llm = ChatGroq(api_key=settings.GROQ_API_KEY, model=model)
         response = await llm.ainvoke(self._build_messages(messages))
         return response.content
@@ -46,11 +32,12 @@ class GroqProvider(BaseLLMProvider):
     async def stream_chat(
         self,
         messages: list[dict],
-        model: str = "llama3-70b-8192",
+        model: str = None,
         **kwargs
     ) -> AsyncGenerator[str, None]:
+        model = model or settings.DEFAULT_GROQ_MODEL
         llm = ChatGroq(
-            api_key=settings.GROQ_API_KwhEY,
+            api_key=settings.GROQ_API_KEY,
             model=model,
             streaming=True
         )
@@ -59,4 +46,4 @@ class GroqProvider(BaseLLMProvider):
                 yield chunk.content
 
     def get_available_models(self) -> list[str]:
-        return GROQ_MODELS
+        return settings.GROQ_MODELS
