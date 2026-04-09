@@ -6,6 +6,10 @@ from app.core.config import settings
 
 class AgentService:
 
+    @staticmethod
+    def _default_namespace(conversation_id: str) -> str:
+        return conversation_id if conversation_id.startswith("conv_") else f"conv_{conversation_id}"
+
     async def run(
         self,
         user_message: str,
@@ -23,7 +27,7 @@ class AgentService:
 
         provider = provider or settings.DEFAULT_LLM_PROVIDER
         model    = model    or settings.DEFAULT_GROQ_MODEL
-        namespace = namespace or f"conv_{conversation_id}"
+        namespace = namespace or self._default_namespace(conversation_id)
 
         # ── Build Initial State ────────────────────
         initial_state: AgentState = {

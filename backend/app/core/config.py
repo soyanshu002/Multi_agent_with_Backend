@@ -25,7 +25,7 @@ class Settings(BaseSettings):
 
     # Groq Models
     GROQ_API_KEY: str = ""
-    DEFAULT_GROQ_MODEL: str = "llama3-70b-8192"
+    DEFAULT_GROQ_MODEL: str = "llama-3.3-70b-versatile"
 
     # All Available Groq Models (no key needed, just model names)
     GROQ_MODELS: list = [
@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     "llama-3.1-70b-versatile",
     "llama-3.1-8b-instant",
     "llama3-8b-8192",
-    "qwen-qwen3-70b",
+    "openai/gpt-oss-120b",            # Groq-hosted OSS model
     "llama-3.2-11b-vision-preview",   # vision model
     "llama-4-scout-17b-16e-instruct", # vision model
     "mixtral-8x7b-32768",
@@ -85,7 +85,7 @@ class Settings(BaseSettings):
     # ── Embeddings ────────────────────────────────────
     JINA_API_KEY: str = ""
     EMBEDDING_PROVIDER: str = "jina"
-    EMBEDDING_MODEL: str = "jina-embeddings-v2-base-en"   # ← match your old working model
+    EMBEDDING_MODEL: str = "jina-embeddings-v2-base-en"  # ← jina-v2 model name
     EMBEDDING_DIMENSION: int = 768                         # ← jina-v2 = 768 dims
 
     # ── Cloudinary ────────────────────────────────

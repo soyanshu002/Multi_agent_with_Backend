@@ -3,9 +3,13 @@ from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone, ServerlessSpec
 from app.core.config import settings
 from dotenv import load_dotenv
-load_dotenv()  # force reload .env
+load_dotenv()
 import os
-print("ENV KEY:", os.getenv("PINECONE_API_KEY", "NOT FOUND"))
+
+# ← ADD THIS to debug
+print("EMBEDDING_MODEL:", settings.EMBEDDING_MODEL)
+print("EMBEDDING_DIMENSION:", settings.EMBEDDING_DIMENSION)
+print("PINECONE_KEY:", settings.PINECONE_API_KEY[:10], "...")
 
 
 def get_pinecone_client() -> Pinecone:
@@ -13,44 +17,39 @@ def get_pinecone_client() -> Pinecone:
 
 
 def ensure_index_exists():
-    """Create Pinecone index if it doesn't exist"""
     pc = get_pinecone_client()
     if settings.PINECONE_INDEX_NAME not in pc.list_indexes().names():
         pc.create_index(
             name=settings.PINECONE_INDEX_NAME,
-            dimension=settings.EMBEDDING_DIMENSION,   # 1024 for jina-v3
+            dimension=768,          # ← HARDCODED to match existing index
             metric="cosine",
             spec=ServerlessSpec(
                 cloud="aws",
-                region=settings.PINECONE_ENVIRONMENT  # us-east-1
+                region="us-east-1"
             )
         )
 
 
 def get_embeddings():
     return JinaEmbeddings(
-        model_name=settings.EMBEDDING_MODEL,
+        model_name="jina-embeddings-v2-base-en",   # ← HARDCODED 768 dims
         jina_api_key=settings.JINA_API_KEY
     )
 
 
 def create_vector_store(chunks, namespace: str) -> PineconeVectorStore:
-    """Embed and store document chunks in Pinecone"""
     ensure_index_exists()
-
     vector_store = PineconeVectorStore.from_documents(
         documents=chunks,
         embedding=get_embeddings(),
         index_name=settings.PINECONE_INDEX_NAME,
-        namespace=namespace        # isolate per user/conversation
+        namespace=namespace
     )
     return vector_store
 
 
 def get_vector_store(namespace: str) -> PineconeVectorStore:
-    """Get existing vector store for similarity search"""
     ensure_index_exists()
-
     return PineconeVectorStore(
         index_name=settings.PINECONE_INDEX_NAME,
         embedding=get_embeddings(),
@@ -59,13 +58,11 @@ def get_vector_store(namespace: str) -> PineconeVectorStore:
 
 
 def similarity_search(query: str, namespace: str, k: int = 4) -> list:
-    """Search for similar documents"""
     store = get_vector_store(namespace)
     return store.similarity_search(query, k=k)
 
 
 def delete_namespace(namespace: str):
-    """Delete all vectors for a conversation/user"""
     pc = get_pinecone_client()
     index = pc.Index(settings.PINECONE_INDEX_NAME)
     index.delete(delete_all=True, namespace=namespace)

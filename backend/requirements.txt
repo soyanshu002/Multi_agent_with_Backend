@@ -37,9 +37,10 @@ pandas
 # File Storage
 cloudinary
 
-# Voice
-gtts
-openai-whisper
+# Audio
+groq
+openai
+aiohttp
 
 # Observability
 langsmith
