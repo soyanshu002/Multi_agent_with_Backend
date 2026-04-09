@@ -1,10 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
+from pathlib import Path
 from app.core.config import settings
 from app.db.database import create_tables
 from app.api.routes import auth, health, chat
 from app.services.redis.redis_services import redis_service  # add import
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+FIGMA_UI_FILE = PROJECT_ROOT / "frontend" / "figma_mock" / "agentic_hub_usecase_ui.html"
+AUTH_UI_FILE = PROJECT_ROOT / "frontend" / "figma_mock" / "agentic_hub_auth.html"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -47,4 +53,24 @@ async def root():
         "version": settings.APP_VERSION,
         "docs": "/docs",
         "health": "/health",
+    }
+
+
+@app.get("/ui-prototype")
+async def ui_prototype():
+    if FIGMA_UI_FILE.exists():
+        return FileResponse(str(FIGMA_UI_FILE))
+    return {
+        "error": "UI prototype not found",
+        "expected_path": str(FIGMA_UI_FILE)
+    }
+
+
+@app.get("/ui-auth")
+async def ui_auth():
+    if AUTH_UI_FILE.exists():
+        return FileResponse(str(AUTH_UI_FILE))
+    return {
+        "error": "Auth UI not found",
+        "expected_path": str(AUTH_UI_FILE)
     }

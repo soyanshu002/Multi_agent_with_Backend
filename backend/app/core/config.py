@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRE_MINUTES: int = 1440
 
+    # ── Supabase Auth ─────────────────────────────
+    SUPABASE_URL: str = ""
+    SUPABASE_ANON_KEY: str = ""
+
     # ── Database ──────────────────────────────────
     DATABASE_URL: str
 

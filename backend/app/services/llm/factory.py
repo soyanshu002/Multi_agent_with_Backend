@@ -11,6 +11,10 @@ _providers = {
 }
 
 
+def get_supported_providers() -> list[str]:
+    return list(_providers.keys())
+
+
 def get_llm_provider(provider: str = None) -> BaseLLMProvider:
     name = provider or settings.DEFAULT_LLM_PROVIDER
     if name not in _providers:

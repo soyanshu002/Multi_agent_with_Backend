@@ -3,8 +3,10 @@ from fastapi.responses import StreamingResponse
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 from typing import Optional
+import base64
+from groq import AsyncGroq
 from app.agents.agent_service import agent_service
-from app.services.llm.factory import get_llm_provider
+from app.services.llm.factory import get_llm_provider, get_supported_providers
 from app.services.rag.rag_services import rag_service
 from app.services.audio_service import get_audio_service
 from app.core.security import verify_access_token
@@ -12,6 +14,56 @@ from app.core.config import settings, get_models_for_provider
 
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+
+
+VISION_MODEL_PREFERENCES = [
+    "meta-llama/llama-4-scout-17b-16e-instruct",
+    "llama-4-scout-17b-16e-instruct",
+    "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "llama-4-maverick-17b-128e-instruct",
+    "llama-3.2-11b-vision-preview",
+    "llama-3.2-90b-vision-preview",
+]
+
+
+def _get_auto_vision_model(requested_model: Optional[str] = None) -> str:
+    available = settings.GROQ_MODELS
+
+    # If requested model is explicitly a known vision-capable model and available, use it.
+    if requested_model and requested_model in VISION_MODEL_PREFERENCES and requested_model in available:
+        return requested_model
+
+    # Otherwise auto-select best available vision model.
+    for model in VISION_MODEL_PREFERENCES:
+        if model in available:
+            return model
+
+    raise HTTPException(
+        status_code=400,
+        detail="No vision model configured. Add a Groq vision model in GROQ_MODELS."
+    )
+
+
+def _get_vision_candidates(requested_model: Optional[str] = None) -> list[str]:
+    candidates: list[str] = []
+
+    # User-requested model gets highest priority.
+    if requested_model:
+        candidates.append(requested_model)
+
+    # Known preferred model IDs and aliases.
+    for m in VISION_MODEL_PREFERENCES:
+        if m not in candidates:
+            candidates.append(m)
+
+    # Configured models that look vision-capable.
+    for m in settings.GROQ_MODELS:
+        lower = m.lower()
+        if "vision" in lower or "llama-4" in lower:
+            if m not in candidates:
+                candidates.append(m)
+
+    return candidates
 
 
 # ── Request Schemas ────────────────────────────────
@@ -127,7 +179,7 @@ async def get_models(
 @router.get("/providers")
 async def get_providers(token: str = Depends(oauth2_scheme)):
     verify_access_token(token)
-    return {"providers": settings.LLM_PROVIDERS}
+    return {"providers": get_supported_providers()}
 
 
 # ── Audio: Speech-to-Text ──────────────────────────
@@ -138,7 +190,6 @@ async def speech_to_text(
     prompt: Optional[str] = Form(None),
     token: str = Depends(oauth2_scheme)
 ):
-    """Convert audio file to text using Groq Whisper API."""
     user_id = verify_access_token(token)
     if not user_id:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
@@ -146,12 +197,11 @@ async def speech_to_text(
     try:
         audio_bytes = await file.read()
         audio_service = get_audio_service()
-        result = await audio_service.speech_to_text(
+        return await audio_service.speech_to_text(
             audio_bytes,
             language=language,
             prompt=prompt
         )
-        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -162,20 +212,18 @@ async def text_to_speech(
     req: TextToSpeechRequest,
     token: str = Depends(oauth2_scheme)
 ):
-    """Convert text to speech using OpenAI TTS API."""
     user_id = verify_access_token(token)
     if not user_id:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
 
     try:
         audio_service = get_audio_service()
-        result = await audio_service.text_to_speech(
+        return await audio_service.text_to_speech(
             text=req.text,
             voice=req.voice,
             speed=req.speed,
             language=req.language
         )
-        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -183,7 +231,6 @@ async def text_to_speech(
 # ── Audio: Available Voices ────────────────────────
 @router.get("/audio/voices")
 async def get_voices(token: str = Depends(oauth2_scheme)):
-    """Get list of available TTS voices."""
     verify_access_token(token)
     audio_service = get_audio_service()
     return {"voices": audio_service.get_available_voices()}
@@ -192,7 +239,88 @@ async def get_voices(token: str = Depends(oauth2_scheme)):
 # ── Audio: Available Languages ────────────────────
 @router.get("/audio/languages")
 async def get_languages(token: str = Depends(oauth2_scheme)):
-    """Get list of supported STT languages."""
     verify_access_token(token)
     audio_service = get_audio_service()
     return {"languages": audio_service.get_available_languages()}
+
+
+# ── Vision: Ask About Image ───────────────────────
+@router.post("/vision/ask")
+async def ask_about_image(
+    file: UploadFile = File(...),
+    question: str = Form(...),
+    model: Optional[str] = Form(None),
+    token: str = Depends(oauth2_scheme)
+):
+    user_id = verify_access_token(token)
+    if not user_id:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+    try:
+        image_bytes = await file.read()
+        if not image_bytes:
+            raise HTTPException(status_code=400, detail="Uploaded image is empty")
+
+        selected_model = _get_auto_vision_model(model)
+        mime_type = file.content_type or "image/png"
+        image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+        image_data_url = f"data:{mime_type};base64,{image_b64}"
+
+        client = AsyncGroq(api_key=settings.GROQ_API_KEY)
+        last_error = ""
+        used_model = selected_model
+
+        for candidate_model in _get_vision_candidates(model):
+            try:
+                completion = await client.chat.completions.create(
+                    model=candidate_model,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": question},
+                                {"type": "image_url", "image_url": {"url": image_data_url}},
+                            ],
+                        }
+                    ],
+                    temperature=0.2,
+                )
+
+                answer = ""
+                if completion.choices and completion.choices[0].message:
+                    answer = completion.choices[0].message.content or ""
+
+                if not answer:
+                    answer = "I could not generate an answer from this image. Please try another image or question."
+
+                used_model = candidate_model
+                return {
+                    "response": answer,
+                    "question": question,
+                    "model": used_model,
+                    "status": "ok"
+                }
+            except Exception as model_err:
+                err_text = str(model_err)
+                last_error = err_text
+                lowered = err_text.lower()
+                # Retry only when model is invalid/decommissioned/not accessible.
+                if (
+                    "model_not_found" in lowered
+                    or "decommissioned" in lowered
+                    or "no longer supported" in lowered
+                    or "do not have access" in lowered
+                    or "messages[0].content must be a string" in lowered
+                    or "content must be a string" in lowered
+                ):
+                    continue
+                raise HTTPException(status_code=500, detail=err_text)
+
+        raise HTTPException(
+            status_code=400,
+            detail=f"No working vision model found for this account. Last error: {last_error}"
+        )
+    except Exception as e:
+        if isinstance(e, HTTPException):
+            raise e
+        raise HTTPException(status_code=500, detail=str(e))

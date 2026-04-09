@@ -28,4 +28,5 @@ class AgentState(TypedDict):
 
     # ── Response ──────────────────────────────────
     final_response  : Optional[str]                  # final answer to return
+    response_data   : Optional[dict]                 # structured payload for UI
     error           : Optional[str]                  # error message if any

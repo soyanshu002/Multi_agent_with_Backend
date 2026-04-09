@@ -10,6 +10,29 @@ You can help with coding, analysis, writing, math, and general questions.
 Be concise, accurate, and friendly."""
 
 
+def _build_response_data(response: str, provider: str, model: str) -> dict:
+    lines = [line.strip() for line in response.splitlines() if line.strip()]
+    summary = lines[0] if lines else response
+    sections = []
+
+    for line in lines[1:]:
+        clean_line = line.lstrip("-*•0123456789. ").strip()
+        if clean_line:
+            sections.append({
+                "title": "Point",
+                "body": clean_line,
+            })
+
+    return {
+        "kind": "chat",
+        "summary": summary,
+        "answer": response,
+        "sections": sections,
+        "provider": provider,
+        "model": model,
+    }
+
+
 async def chat_node(state: AgentState) -> AgentState:
     """
     Basic chat node — handles general conversation.
@@ -43,9 +66,16 @@ async def chat_node(state: AgentState) -> AgentState:
             {"role": "assistant", "content": response}
         )
 
+        response_data = _build_response_data(
+            response=response,
+            provider=state.get("provider", settings.DEFAULT_LLM_PROVIDER),
+            model=model,
+        )
+
         return {
             **state,
             "final_response": response,
+            "response_data": response_data,
             "messages": state["messages"] + [AIMessage(content=response)],
             "error": None
         }

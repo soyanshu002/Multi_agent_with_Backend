@@ -35,13 +35,14 @@ async def rag_node(state: AgentState) -> AgentState:
         history = await redis_service.get_history(state["conversation_id"])
 
         # Step 4 — run RAG pipeline
-        answer = await rag_service.query(
+        rag_result = await rag_service.query(
             question=question,
             namespace=namespace,
             provider=state.get("provider", settings.DEFAULT_LLM_PROVIDER),
             model=state.get("model", settings.DEFAULT_GROQ_MODEL),
             chat_history=history[-6:]   # last 3 turns
         )
+        answer = rag_result.get("answer", "")
 
         # Step 5 — save to Redis
         await redis_service.append_message(
@@ -56,6 +57,7 @@ async def rag_node(state: AgentState) -> AgentState:
         return {
             **state,
             "final_response": answer,
+            "response_data": rag_result,
             "messages": state["messages"] + [AIMessage(content=answer)],
             "error": None
         }

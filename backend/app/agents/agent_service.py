@@ -54,7 +54,8 @@ class AgentService:
             "provider":        provider,
             "model":           model,
             "usecase":         result.get("next_node", usecase),
-            "error":           result.get("error")
+            "error":           result.get("error"),
+            "response_data":   result.get("response_data"),
         }
 
 

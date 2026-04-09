@@ -1,5 +1,6 @@
 import os
 import tempfile
+from pathlib import Path
 from app.services.rag.document_loader import load_and_chunk
 from app.services.rag.pinecone_store import create_vector_store, similarity_search, delete_namespace
 from app.services.rag.embeddings import get_default_embedding_model
@@ -39,8 +40,8 @@ class RAGService:
         provider: str = None,
         model: str = None,
         chat_history: list[dict] = None
-    ) -> str:
-        """Search Pinecone → build prompt → get LLM answer"""
+    ) -> dict:
+        """Search Pinecone → build prompt → get LLM answer and return metadata."""
 
         provider = provider or settings.DEFAULT_LLM_PROVIDER
         model    = model    or settings.DEFAULT_GROQ_MODEL
@@ -75,7 +76,35 @@ class RAGService:
 
         # Step 5 — get LLM response
         llm = get_llm_provider(provider)
-        return await llm.chat(messages, model)
+        answer = await llm.chat(messages, model)
+
+        sources = []
+        for index, doc in enumerate(docs[:4], start=1):
+            metadata = doc.metadata or {}
+            source_name = metadata.get("source") or "unknown"
+            source_path = Path(str(source_name)).name
+            source_item = {
+                "rank": index,
+                "source": source_path,
+                "page": metadata.get("page", metadata.get("page_number")),
+                "sheet": metadata.get("sheet"),
+                "slide": metadata.get("slide"),
+                "chunk": metadata.get("chunk", metadata.get("chunk_index")),
+                "preview": doc.page_content[:260].strip(),
+            }
+            sources.append({key: value for key, value in source_item.items() if value is not None and value != ""})
+
+        return {
+            "kind": "document_qa",
+            "question": question,
+            "answer": answer,
+            "namespace": namespace,
+            "retrieved_chunks": len(docs),
+            "sources": sources,
+            "model": model,
+            "provider": provider,
+            "summary": answer,
+        }
 
     # ── Delete Document Namespace ──────────────────
     async def delete_document(self, namespace: str):
