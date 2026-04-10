@@ -26,8 +26,7 @@ langchain-openai
 langchain-anthropic
 langchain-google-genai
 langgraph
-psycopg2-binary asyncpg
-
+asyncpg
 # RAG
 pinecone
 langchain-pinecone
