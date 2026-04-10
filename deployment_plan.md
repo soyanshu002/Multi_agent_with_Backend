@@ -58,10 +58,13 @@ You will need to set these in Railway's "Variables" tab for both services:
 5.  Add the **Frontend** service (Optional):
     *   Root Directory: `frontend`
     *   Start Command: `streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0`
-### Method C: Docker Compose (Self-Hosted / Anywhere)
+### Method C: Docker Compose with Nginx (Production Ready)
 1. Ensure Docker and Docker Compose are installed.
 2. Run `docker-compose up --build`.
-3. The Backend will be at `http://localhost:8000` and Streamlit at `http://localhost:8501`.
+3. Nginx will now handle all routing on port `80`:
+   - **Streamlit Frontend**: `http://your-ip/`
+   - **Backend UI**: `http://your-ip/ui-final`
+   - **API Docs**: `http://your-ip/api/docs` (Proxied)
 
 ---
 
@@ -69,7 +72,7 @@ You will need to set these in Railway's "Variables" tab for both services:
 
 1.  [x] **Create Deployment Plan Document**
 2.  [x] **Optimize Backend Config**: Added `field_validator` for `DATABASE_URL` in `config.py`.
-3.  [x] **Create Dockerfiles**: Created `backend/Dockerfile` and `frontend/Dockerfile`.
+3.  [x] **Create Dockerfiles**: Created `backend/Dockerfile`, `frontend/Dockerfile`, and `nginx/Dockerfile`.
 4.  [x] **Verify Streamlit Connection**: Updated `frontend/streamlit_app.py` to use `BACKEND_URL`.
 5.  [x] **Health Check Fix**: Verified `/health` endpoint is Railway-ready.
-6.  [x] **Orchestration**: Created `docker-compose.yml`.
+6.  [x] **Orchestration**: Created `docker-compose.yml` with Nginx reverse proxy.
