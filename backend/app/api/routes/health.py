@@ -32,9 +32,12 @@ async def health_details(db: AsyncSession = Depends(get_db)):
     # check redis
     redis_status = "ok"
     try:
-        r = aioredis.from_url(settings.REDIS_URL)
-        await r.ping()
-        await r.aclose()
+        if settings.REDIS_URL:
+            r = aioredis.from_url(settings.REDIS_URL)
+            await r.ping()
+            await r.aclose()
+        else:
+            redis_status = "not_configured"
     except Exception as e:
         redis_status = f"error: {str(e)}"
 

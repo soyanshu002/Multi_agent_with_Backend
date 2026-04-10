@@ -3,13 +3,17 @@ from sqlalchemy.orm import DeclarativeBase
 from app.core.config import settings
 
 # ── Engine ────────────────────────────────────────
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,        # logs SQL queries in debug mode
-    pool_size=10,               # max 10 connections in pool
-    max_overflow=20,            # 20 extra connections allowed
-    pool_pre_ping=True,         # check connection health before using
-)
+engine_kwargs = {
+    "echo": settings.DEBUG,
+    "pool_pre_ping": True,
+}
+
+# SQLite async engine does not support pool sizing options used by Postgres.
+if not settings.DATABASE_URL.startswith("sqlite"):
+    engine_kwargs["pool_size"] = 10
+    engine_kwargs["max_overflow"] = 20
+
+engine = create_async_engine(settings.DATABASE_URL, **engine_kwargs)
 
 # ── Session Factory ───────────────────────────────
 AsyncSessionLocal = async_sessionmaker(
@@ -38,5 +42,9 @@ async def get_db() -> AsyncSession:
 
 # ── Create All Tables ─────────────────────────────
 async def create_tables():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+    except Exception as exc:
+        # Keep the API bootable for healthchecks when DB is temporarily unavailable.
+        print(f"⚠️ Database initialization skipped: {exc}")

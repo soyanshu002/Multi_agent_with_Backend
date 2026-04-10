@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False
 
     # ── JWT ───────────────────────────────────────
-    JWT_SECRET: str
+    JWT_SECRET: str = "change-this-in-production"
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRE_MINUTES: int = 1440
 
@@ -24,10 +24,10 @@ class Settings(BaseSettings):
     SUPABASE_ANON_KEY: str = ""
 
     # ── Database ──────────────────────────────────
-    DATABASE_URL: str
+    DATABASE_URL: str = "sqlite+aiosqlite:///./app.db"
 
     # ── Redis ─────────────────────────────────────
-    REDIS_URL: str
+    REDIS_URL: str = ""
 
     # ── LLM Providers ─────────────────────────────
     DEFAULT_LLM_PROVIDER: str = "groq"
@@ -139,5 +139,3 @@ def get_default_model(provider: str) -> str:
         "gemini":    settings.DEFAULT_GEMINI_MODEL,
     }
     return default_map.get(provider, settings.DEFAULT_GROQ_MODEL)
-# TEMP DEBUG — remove after testing
-print(">>> PINECONE_API_KEY loaded:", repr(settings.PINECONE_API_KEY[:10] if settings.PINECONE_API_KEY else "EMPTY"))

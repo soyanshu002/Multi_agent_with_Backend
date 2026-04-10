@@ -10,6 +10,9 @@ class RedisService:
         self.client: Optional[Redis] = None
 
     async def connect(self):
+        if not settings.REDIS_URL:
+            self.client = None
+            return
         self.client = Redis.from_url(
             settings.REDIS_URL,
             encoding="utf-8",
@@ -64,6 +67,8 @@ class RedisService:
 
     async def ping(self) -> bool:
         try:
+            if not self.client:
+                return False
             return await self.client.ping()
         except Exception:
             return False
