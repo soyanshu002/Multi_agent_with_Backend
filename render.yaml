@@ -2,6 +2,7 @@ databases:
   - name: multi-agent-db
     plan: free
     region: oregon
+    ipAllowList: []
 
 services:
   # -------------------------
@@ -11,6 +12,7 @@ services:
     name: multi-agent-redis
     plan: free
     region: oregon
+    ipAllowList: []
 
   # -------------------------
   # 2. Backend (FastAPI)
