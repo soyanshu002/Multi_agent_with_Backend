@@ -38,16 +38,11 @@ class Settings(BaseSettings):
 
     # All Available Groq Models (no key needed, just model names)
     GROQ_MODELS: list = [
-    "llama-3.3-70b-versatile",        # replaces llama3-70b-8192
-    "llama-3.1-70b-versatile",
-    "llama-3.1-8b-instant",
-    "llama3-8b-8192",
+    "llama-3.3-70b-versatile",
+    "qwen/qwen3-32b",
     "openai/gpt-oss-120b",            # Groq-hosted OSS model
     "llama-3.2-11b-vision-preview",   # vision model
-    "llama-4-scout-17b-16e-instruct", # vision model
-    "mixtral-8x7b-32768",
-    "gemma2-9b-it",
-    "gemma-7b-it",
+    "llama-4-scout-17b-16e-instruct", 
 ]
 
     # OpenAI Models
@@ -101,6 +96,11 @@ class Settings(BaseSettings):
     CLOUDINARY_CLOUD_NAME: str = ""
     CLOUDINARY_API_KEY: str = ""
     CLOUDINARY_API_SECRET: str = ""
+
+    # ── Image Generation ─────────────────────────
+    REPLICATE_API_KEY: str = ""
+    HUGGINGFACE_API_KEY: str = ""  # For image generation (free tier available)
+    POLLINATIONS_API_KEY: str = ""  # Free publishable key from enter.pollinations.ai
 
     # ── LangSmith ─────────────────────────────────
     LANGCHAIN_TRACING_V2: bool = True

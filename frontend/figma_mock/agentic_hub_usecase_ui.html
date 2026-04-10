@@ -63,12 +63,12 @@
     }
 
     .tag {
-      border: 1px solid var(--line);
-      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.92);
       border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.72rem;
-      color: #cbd5e1;
+      padding: 0.1rem 0.55rem;
+      font-size: 0.62rem;
+      color: #d8e1ee;
       white-space: nowrap;
     }
 
@@ -89,7 +89,38 @@
     }
 
     .vision-raw {
-      max-height: 22rem;
+      max-height: 12rem;
+      overflow: auto;
+    }
+
+    .compact-rich-card {
+      padding: 0.85rem !important;
+    }
+
+    .compact-rich-card .vision-panel {
+      padding: 0.7rem !important;
+    }
+
+    .compact-rich-card .vision-panel .text-sm,
+    .compact-rich-card .vision-panel p,
+    .compact-rich-card .vision-panel div,
+    .compact-rich-card .vision-panel span,
+    .compact-rich-card .vision-panel li {
+      line-height: 1.45 !important;
+    }
+
+    .compact-rich-card .summary-block {
+      max-height: 9.5rem;
+      overflow: auto;
+    }
+
+    .compact-rich-card .sources-block {
+      max-height: 11rem;
+      overflow: auto;
+    }
+
+    .compact-rich-card .stage-block {
+      max-height: 9rem;
       overflow: auto;
     }
 
@@ -107,12 +138,35 @@
     }
 
     .quick-tile {
-      border: 1px solid #2a3f5a;
+      border: 1px solid #31465f;
       border-radius: 12px;
-      background: rgba(15, 23, 42, 0.84);
+      background: rgba(13, 21, 36, 0.92);
       padding: 0.62rem 0.68rem;
-      font-size: 0.76rem;
-      color: #cbd5e1;
+      font-size: 0.72rem;
+      color: #d7dfeb;
+    }
+
+    .usecase-btn {
+      font-size: 0.76rem !important;
+      padding: 0.35rem 0.6rem !important;
+    }
+
+    .usecase-btn.active {
+      font-weight: 600 !important;
+    }
+
+    .message-bot p,
+    .message-user,
+    .vision-panel p,
+    .summary-view p,
+    .summary-view pre {
+      font-size: 0.78rem !important;
+      line-height: 1.45 !important;
+    }
+
+    .summary-view .summary-block {
+      max-height: 7rem;
+      overflow: auto;
     }
 
     .mobile-top {
@@ -124,6 +178,96 @@
     .mobile-top p,
     .mobile-top i {
       color: #e2e8f0 !important;
+    }
+
+    .layout {
+      grid-template-columns: 222px 1fr !important;
+    }
+
+    .sidebar {
+      width: 222px;
+      overflow: hidden;
+    }
+
+    .sidebar .p-5,
+    .sidebar .p-4,
+    .sidebar .px-4,
+    .sidebar .pb-4,
+    .sidebar .pt-6,
+    .sidebar .p-4.border-t {
+      padding-left: 0.8rem !important;
+      padding-right: 0.8rem !important;
+    }
+
+    .sidebar .space-y-1 > * {
+      font-size: 0.84rem;
+    }
+
+    .sidebar .text-xs {
+      font-size: 0.65rem !important;
+    }
+
+    .profile-card {
+      border: 1px solid #2b3f5a;
+      background: linear-gradient(150deg, rgba(12, 24, 44, 0.94), rgba(10, 18, 33, 0.98));
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px rgba(77, 105, 139, 0.2);
+    }
+
+    .profile-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.38);
+      background: radial-gradient(circle at 30% 25%, #334155, #0f172a 65%);
+      color: #e2e8f0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .auth-status-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.12rem 0.5rem;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+    }
+
+    .auth-status-pill.ok {
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(6, 78, 59, 0.45);
+    }
+
+    .auth-status-pill.off {
+      color: #fda4af;
+      border-color: rgba(251, 113, 133, 0.35);
+      background: rgba(136, 19, 55, 0.35);
+    }
+
+    .auth-status-pill.warn {
+      color: #fcd34d;
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(120, 53, 15, 0.35);
+    }
+
+    .sidebar .rounded-lg.border.border-slate-700.bg-slate-900\/60.p-3.space-y-2 {
+      display: none !important;
     }
 
     /* Dark overrides for utility classes used in the markup */
@@ -157,6 +301,28 @@
       color: #5eead4 !important;
     }
 
+    select,
+    select option {
+      background-color: #0f172a !important;
+      color: #e2e8f0 !important;
+      border-color: #334155 !important;
+    }
+
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.2);
+    }
+
+    #providerSelect,
+    #modelSelect {
+      background-color: #0f172a !important;
+      color: #e2e8f0 !important;
+      border: 1px solid #334155 !important;
+      border-radius: 999px;
+      padding: 0.1rem 1.25rem 0.1rem 0.25rem;
+      appearance: auto;
+    }
+
     .message-bot {
       background: rgba(16, 26, 43, 0.92) !important;
     }
@@ -186,6 +352,39 @@
     .vision-panel div,
     .vision-panel span {
       color: #e2e8f0 !important;
+    }
+
+    .vision-copy-btn,
+    .vision-tab,
+    .stage-block button,
+    .sources-block > div,
+    .summary-block,
+    .vision-panel {
+      background: rgba(11, 18, 32, 0.88) !important;
+      border-color: #31465f !important;
+      color: #d8e1ee !important;
+    }
+
+    .summary-view[data-summary-panel="summary"] .summary-block {
+      max-height: 6.5rem;
+    }
+
+    .vision-copy-btn:hover,
+    .vision-tab:hover,
+    .stage-block button:hover {
+      background: rgba(18, 28, 48, 0.96) !important;
+    }
+
+    .vision-tab.active {
+      background: rgba(15, 118, 110, 0.92) !important;
+      color: #f8fafc !important;
+      border-color: rgba(15, 118, 110, 1) !important;
+    }
+
+    .tag.bg-slate-50 {
+      background: rgba(15, 23, 42, 0.96) !important;
+      border-color: #31465f !important;
+      color: #d8e1ee !important;
     }
 
     .brand-mark {
@@ -307,13 +506,19 @@
         </button>
       </div>
 
-      <div class="px-4 pb-4">
-        <div class="rounded-lg border border-slate-700 bg-slate-900/60 p-3 space-y-2">
-          <p class="m-0 text-[11px] uppercase tracking-wider text-slate-400">Authentication</p>
-          <p id="authStatus" class="m-0 text-[11px] text-emerald-400">Checking session...</p>
-          <div class="flex gap-2">
-            <button id="switchAuthBtn" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold py-2 rounded-md">Open Auth Page</button>
-            <button id="logoutBtn" class="flex-1 bg-rose-700 hover:bg-rose-600 text-white text-xs font-semibold py-2 rounded-md">Logout</button>
+      <div class="px-4 pb-3">
+        <div class="profile-card p-2.5">
+          <div class="flex items-center gap-2">
+            <div id="profileAvatar" class="profile-avatar" title="Profile">--</div>
+            <div class="min-w-0 flex-1">
+              <div class="m-0 text-[10px] uppercase tracking-wider text-slate-400">Account</div>
+              <div id="signedInAsInline" class="text-[11px] text-slate-200 truncate font-semibold">loading...</div>
+              <div id="authStatus" class="auth-status-pill ok mt-1">Checking session...</div>
+            </div>
+          </div>
+          <div class="flex gap-2 pt-2">
+            <button id="switchAuthBtn" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white text-[10px] font-semibold py-1.5 rounded-md">Auth</button>
+            <button id="logoutBtn" class="flex-1 bg-rose-700 hover:bg-rose-600 text-white text-[10px] font-semibold py-1.5 rounded-md">Logout</button>
           </div>
         </div>
       </div>
@@ -336,9 +541,12 @@
           History
         </button>
 
-        <div class="pt-6 pb-2 px-1 text-xs uppercase tracking-widest text-slate-500">Recent Threads</div>
-        <div id="recentThreadsList" class="space-y-1"></div>
       </nav>
+
+      <div class="px-3 py-2 border-t border-slate-800/70">
+        <p class="m-0 text-[10px] uppercase tracking-wider text-slate-400 mb-2">Recent</p>
+        <div id="recentThreadsList" class="space-y-1"></div>
+      </div>
 
       <div class="p-4 border-t border-slate-800/70 text-xs text-slate-400">
         <div>Signed in as <span id="signedInAs">loading...</span></div>
@@ -381,13 +589,6 @@
       </section>
 
       <section class="flex-1 overflow-y-auto px-4 md:px-8 pb-5 pt-4">
-        <div class="mx-auto max-w-4xl mb-4 pulse-banner">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="text-sm text-slate-700"><strong>New in this build:</strong> improved account isolation, richer response cards, and smoother voice/image flow.</div>
-            <span class="tag">Release: April 2026</span>
-          </div>
-        </div>
-
         <div class="mx-auto max-w-4xl space-y-4" id="view-chat">
           <div class="message-bot glass rounded-2xl rounded-tl-md p-4 max-w-[90%] border border-teal-100 shadow-sm">
             <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">Connected Workspace</div>
@@ -413,12 +614,12 @@
         <div class="mx-auto max-w-4xl hidden" id="view-rag">
           <div class="glass rounded-2xl border border-amber-100 p-4 mb-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2 text-sm">
+              <div class="flex items-center gap-2 text-xs">
                 <i data-lucide="file-text" class="w-4 h-4 text-amber-700"></i>
                 <strong id="uploadedFileName">No file uploaded</strong>
                 <span id="uploadStateText" class="text-slate-500">upload to index in Pinecone</span>
               </div>
-              <span id="namespaceTag" class="text-xs bg-amber-100 text-amber-900 px-2 py-1 rounded-full">Namespace: conv_...</span>
+              <span id="namespaceTag" class="text-[0.65rem] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded-full">Namespace: conv_...</span>
             </div>
           </div>
           <div class="space-y-4" id="ragMessages">
@@ -470,29 +671,22 @@
         </div>
 
         <div class="mx-auto max-w-4xl hidden" id="view-history">
-          <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-            <p class="m-0 text-sm text-slate-700 font-semibold">Recent Conversation History</p>
-            <div id="historyList" class="mt-3 space-y-2 text-sm text-slate-600"></div>
+          <div class="glass border border-slate-700 rounded-2xl p-4 shadow-sm">
+            <p class="m-0 text-sm text-slate-200 font-semibold">Recent Conversation History</p>
+            <div id="historyList" class="mt-3 space-y-2 text-sm text-slate-300"></div>
           </div>
         </div>
       </section>
 
       <footer class="px-4 md:px-8 pb-5 pt-1 shrink-0">
         <div class="mx-auto max-w-4xl bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
-          <div class="px-4 py-2.5 bg-teal-50 border-b border-teal-100 flex items-center justify-between gap-2 text-xs">
-            <div class="flex items-center gap-2 text-slate-700">
-              <i data-lucide="mic" class="w-4 h-4 text-teal-700"></i>
-            </div>
-            <div class="flex items-center gap-2">
-             
-            </div>
-          </div>
           <div class="p-2 flex items-end gap-2">
             <textarea id="promptInput" rows="1" class="w-full border-0 outline-none resize-none p-2 text-sm" placeholder="Message Smruti AgentX or use voice..."></textarea>
             <input id="fileInput" type="file" class="hidden" accept=".pdf,.csv,.docx,.pptx,.xlsx,.xls,.txt,.md,.rtf,.json,.html,.htm" />
             <input id="imageInput" type="file" class="hidden" accept="image/*" />
             <button id="uploadBtn" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Upload"><i data-lucide="paperclip" class="w-5 h-5"></i></button>
             <button id="imageBtn" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Ask about image"><i data-lucide="image" class="w-5 h-5"></i></button>
+            <button id="generateImageBtn" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Generate image (AI)"><i data-lucide="wand-2" class="w-5 h-5"></i></button>
             <button id="sttBtn" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Speech to text"><i data-lucide="mic" class="w-5 h-5"></i></button>
             <button id="ttsBtn" class="p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50" title="Text to speech"><i data-lucide="volume-2" class="w-5 h-5"></i></button>
             <button id="sendBtn" class="p-2 rounded-lg bg-teal-700 text-white hover:bg-teal-800" title="Send"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>
@@ -502,6 +696,35 @@
             <img id="imagePreview" class="max-h-40 rounded-lg border border-slate-200" alt="selected image preview" />
           </div>
           <div id="liveTranscript" class="px-3 pb-2 text-xs text-teal-700 hidden"></div>
+          <div id="imageGenPanel" class="px-3 pb-3 hidden border-t border-slate-200">
+            <div class="mt-2 flex flex-col gap-2">
+              <div>
+                <label class="text-xs font-semibold text-slate-300">Model (FREE - No API Key)</label>
+                <select id="imageGenModelSelect" class="w-full border border-slate-600 bg-slate-800 text-slate-100 rounded-lg p-2 text-sm mt-1">
+                  <option value="pollinations">Pollinations AI (⚡ Free, no key)</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-slate-300">Image Prompt</label>
+                <textarea id="imageGenPrompt" rows="2" class="w-full border border-slate-600 bg-slate-800 text-slate-100 rounded-lg p-2 text-sm mt-1 resize-none placeholder-slate-500" placeholder="Describe the image you want to generate..."></textarea>
+              </div>
+              <div class="flex gap-2">
+                <button id="generateImageConfirmBtn" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold py-2 rounded-lg flex items-center justify-center gap-1">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i>
+                  Generate
+                </button>
+                <button id="cancelImageGenBtn" class="flex-1 bg-slate-300 hover:bg-slate-400 text-slate-800 text-sm font-semibold py-2 rounded-lg">
+                  Cancel
+                </button>
+              </div>
+              <div id="imageGenLoading" class="text-xs text-slate-400 text-center hidden">Generating image...</div>
+              <div id="imageGenError" class="text-xs text-red-400 text-center hidden"></div>
+              <div id="imageGenResult" class="mt-2 hidden">
+                <div class="text-xs font-semibold text-slate-300 mb-2">Generated Images Preview:</div>
+                <div id="generatedImagesList" class="flex flex-col gap-2 max-h-40 overflow-y-auto"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </main>
@@ -521,6 +744,8 @@
     };
 
     const signedInAs = document.getElementById('signedInAs');
+    const signedInAsInline = document.getElementById('signedInAsInline');
+    const profileAvatar = document.getElementById('profileAvatar');
     const switchAuthBtn = document.getElementById('switchAuthBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     const newThreadBtn = document.getElementById('newThreadBtn');
@@ -534,6 +759,7 @@
     const imagePreview = document.getElementById('imagePreview');
     const uploadBtn = document.getElementById('uploadBtn');
     const imageBtn = document.getElementById('imageBtn');
+    const generateImageBtn = document.getElementById('generateImageBtn');
     const sttBtn = document.getElementById('sttBtn');
     const ttsBtn = document.getElementById('ttsBtn');
     const sendBtn = document.getElementById('sendBtn');
@@ -549,6 +775,15 @@
     const chatView = document.getElementById('view-chat');
     const ragMessages = document.getElementById('ragMessages');
     const multiMessages = document.getElementById('multiMessages');
+    const imageGenPanel = document.getElementById('imageGenPanel');
+    const imageGenModelSelect = document.getElementById('imageGenModelSelect');
+    const imageGenPrompt = document.getElementById('imageGenPrompt');
+    const generateImageConfirmBtn = document.getElementById('generateImageConfirmBtn');
+    const cancelImageGenBtn = document.getElementById('cancelImageGenBtn');
+    const imageGenLoading = document.getElementById('imageGenLoading');
+    const imageGenError = document.getElementById('imageGenError');
+    const imageGenResult = document.getElementById('imageGenResult');
+    const generatedImagesList = document.getElementById('generatedImagesList');
     const sendBtnDefaultHtml = sendBtn.innerHTML;
     const sttDefaultHtml = sttBtn.innerHTML;
     const ttsDefaultHtml = ttsBtn.innerHTML;
@@ -670,36 +905,104 @@
       savePersistentState();
     }
 
+    async function openThread(thread) {
+      state.conversationId = thread.id;
+      state.threadTitle = thread.title || 'New Conversation';
+      state.usecase = thread.usecase || 'basic_chat';
+      namespaceTag.textContent = `Namespace: ${state.conversationId}`;
+      currentThreadLabel.textContent = state.threadTitle;
+
+      if (state.token) {
+        const conv = await loadConversationWithMessages(state.conversationId);
+        if (conv && conv.messages) {
+          state.messagesByConversation[state.conversationId] = conv.messages.map(msg => ({
+            role: msg.role,
+            content: msg.content,
+            badge: msg.role === 'assistant' ? 'Assistant' : 'User',
+            usecase: state.usecase,
+            at: new Date(msg.created_at).getTime()
+          }));
+        }
+      }
+
+      renderConversationMessages(state.conversationId);
+      savePersistentState();
+
+      const viewMap = { 'basic_chat': 'chat', 'document_qa': 'rag', 'multi_agent': 'multi', 'system_health': 'health' };
+      const viewKey = viewMap[thread.usecase || 'basic_chat'] || 'chat';
+      activate(viewKey);
+    }
+
+    async function handleDeleteConversation(threadId) {
+      if (!window.confirm('Delete this conversation permanently?')) return;
+
+      const deleted = await deleteConversationOnBackend(threadId);
+      if (!deleted) {
+        appendMessage('assistant', 'Could not delete conversation. Please try again.', 'Delete Error', state.usecase, { persist: false });
+        return;
+      }
+
+      state.threads = state.threads.filter(t => t.id !== threadId);
+      if (state.messagesByConversation && state.messagesByConversation[threadId]) {
+        delete state.messagesByConversation[threadId];
+      }
+
+      if (state.conversationId === threadId) {
+        const nextThread = state.threads[0];
+        if (nextThread) {
+          await openThread(nextThread);
+        } else {
+          resetThread();
+        }
+      }
+
+      renderRecentThreads();
+      renderHistoryPanel();
+      savePersistentState();
+    }
+
     function renderHistoryPanel() {
       historyList.innerHTML = '';
       if (!state.threads.length) {
-        historyList.innerHTML = '<div class="rounded-lg border border-slate-200 p-3 text-slate-500">No saved conversations yet.</div>';
+        historyList.innerHTML = '<div class="rounded-lg border border-slate-700 bg-slate-800/40 p-3 text-slate-400">No saved conversations yet.</div>';
         return;
       }
 
       const sorted = [...state.threads].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
       sorted.forEach(thread => {
+        const item = document.createElement('div');
+        item.className = 'flex items-start gap-2';
+
         const row = document.createElement('button');
         row.type = 'button';
-        row.className = 'w-full text-left rounded-lg border border-slate-200 p-3 hover:bg-slate-50';
+        row.className = 'flex-1 text-left rounded-lg border border-slate-700 bg-slate-800/40 p-3 hover:bg-slate-800/70';
         const preview = thread.preview || 'No messages yet';
         const when = thread.updatedAt ? new Date(thread.updatedAt).toLocaleString() : '';
         row.innerHTML = `
-          <div class="font-semibold text-slate-800 truncate">${escapeHtml(thread.title || 'New Conversation')}</div>
-          <div class="text-xs text-slate-500 mt-1 truncate">${escapeHtml(preview)}</div>
-          <div class="text-[11px] text-slate-400 mt-1">${escapeHtml(when)}</div>
+          <div class="font-semibold text-slate-200 truncate">${escapeHtml(thread.title || 'New Conversation')}</div>
+          <div class="text-xs text-slate-400 mt-1 truncate">${escapeHtml(preview)}</div>
+          <div class="text-[11px] text-slate-500 mt-1">${escapeHtml(when)}</div>
         `;
-        row.addEventListener('click', () => {
-          state.conversationId = thread.id;
-          state.threadTitle = thread.title || 'New Conversation';
-          namespaceTag.textContent = `Namespace: ${state.conversationId}`;
-          currentThreadLabel.textContent = state.threadTitle;
-          renderConversationMessages(state.conversationId);
-          savePersistentState();
-          activate('chat');
+        row.addEventListener('click', async () => {
+          await openThread(thread);
         });
-        historyList.appendChild(row);
+
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'shrink-0 rounded-md border border-rose-700/70 bg-rose-950/50 px-2 py-1 text-[11px] text-rose-300 hover:bg-rose-900/60';
+        del.innerHTML = '<i data-lucide="trash-2" class="w-3.5 h-3.5"></i>';
+        del.title = 'Delete conversation';
+        del.addEventListener('click', async (event) => {
+          event.stopPropagation();
+          await handleDeleteConversation(thread.id);
+        });
+
+        item.appendChild(row);
+        item.appendChild(del);
+        historyList.appendChild(item);
       });
+
+      lucide.createIcons();
     }
 
     function renderConversationMessages(conversationId) {
@@ -767,9 +1070,130 @@
       }
     }
 
+    // ─── Backend Conversation API Functions ─────────────────────────────────
+    async function loadConversationsFromBackend() {
+      if (!state.token) return false;
+      try {
+        const res = await fetch('/api/v1/chat/conversations', {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        if (!res.ok) return false;
+        const data = await res.json();
+        const conversations = data.conversations || [];
+        
+        // Convert backend conversations to frontend thread format
+        state.threads = conversations.map(conv => ({
+          id: conv.id,
+          title: conv.title,
+          provider: conv.provider,
+          model: conv.model,
+          preview: '',
+          createdAt: new Date(conv.created_at).getTime(),
+          updatedAt: new Date(conv.updated_at).getTime()
+        }));
+
+        savePersistentState();
+        renderRecentThreads();
+        renderHistoryPanel();
+        return true;
+      } catch (err) {
+        console.error('Failed to load conversations from backend:', err);
+        return false;
+      }
+    }
+
+    async function createConversationOnBackend(title = 'New Conversation') {
+      if (!state.token) return null;
+      try {
+        const res = await fetch('/api/v1/chat/conversations', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${state.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: title,
+            provider: state.provider,
+            model: state.model
+          })
+        });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (err) {
+        console.error('Failed to create conversation:', err);
+        return null;
+      }
+    }
+
+    async function saveMessageToBackend(conversationId, role, content) {
+      if (!state.token) return false;
+      try {
+        const res = await fetch(`/api/v1/chat/conversations/${conversationId}/messages`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${state.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            role: role,
+            content: content,
+            token_count: 0
+          })
+        });
+        if (!res.ok) return false;
+        return await res.json();
+      } catch (err) {
+        console.error('Failed to save message:', err);
+        return false;
+      }
+    }
+
+    async function loadConversationWithMessages(conversationId) {
+      if (!state.token) return null;
+      try {
+        const res = await fetch(`/api/v1/chat/conversations/${conversationId}`, {
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        if (!res.ok) return null;
+        return await res.json();
+      } catch (err) {
+        console.error('Failed to load conversation:', err);
+        return null;
+      }
+    }
+
+    async function deleteConversationOnBackend(conversationId) {
+      if (!state.token) return true;
+      if (String(conversationId || '').startsWith('conv_')) return true;
+      try {
+        const res = await fetch(`/api/v1/chat/conversations/${conversationId}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${state.token}` }
+        });
+        return res.ok;
+      } catch (err) {
+        console.error('Failed to delete conversation:', err);
+        return false;
+      }
+    }
+
     function setAuthStatus() {
       authStatus.textContent = state.token ? 'Authenticated' : 'Not authenticated';
-      authStatus.className = state.token ? 'm-0 text-[11px] text-emerald-400' : 'm-0 text-[11px] text-rose-400';
+      authStatus.className = state.token ? 'auth-status-pill ok mt-1' : 'auth-status-pill off mt-1';
+    }
+
+    function getInitials(label) {
+      const parts = String(label || '').trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return 'U';
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return `${parts[0][0] || ''}${parts[1][0] || ''}`.toUpperCase();
+    }
+
+    function updateProfileAvatar(identityLabel) {
+      if (!profileAvatar) return;
+      const initials = getInitials(identityLabel || 'user');
+      profileAvatar.innerHTML = '';
+      profileAvatar.textContent = initials;
     }
 
     function goAuth(logout = false) {
@@ -796,16 +1220,24 @@
           return;
         }
         const profile = await res.json();
-        signedInAs.textContent = profile.email || 'user';
+        const identityLabel = profile.full_name || profile.email || 'user';
+        signedInAs.textContent = identityLabel;
+        if (signedInAsInline) signedInAsInline.textContent = identityLabel;
+        updateProfileAvatar(identityLabel);
         const identity = profile.id || profile.email || currentIdentityHint();
         if (identity && String(identity) !== String(state.storageIdentity)) {
           switchPersistentStateForUser(identity);
         }
         setAuthStatus();
+        
+        // Load conversations from backend after authentication
+        await loadConversationsFromBackend();
       } catch (err) {
         signedInAs.textContent = 'unknown';
+        if (signedInAsInline) signedInAsInline.textContent = 'unknown';
+        updateProfileAvatar('unknown');
         authStatus.textContent = 'Cannot verify session';
-        authStatus.className = 'm-0 text-[11px] text-orange-400';
+        authStatus.className = 'auth-status-pill warn mt-1';
       }
     }
 
@@ -815,7 +1247,7 @@
       return clean.length > 40 ? `${clean.slice(0, 40)}...` : clean;
     }
 
-    function upsertThread(threadId, title) {
+    function upsertThread(threadId, title, usecase = state.usecase) {
       const idx = state.threads.findIndex(t => t.id === threadId);
       const msgs = getConversationMessages(threadId);
       const latest = msgs.length ? msgs[msgs.length - 1] : null;
@@ -829,6 +1261,7 @@
         title: title || 'New Conversation',
         updatedAt: Date.now(),
         preview: previewText ? shortenText(previewText, 80) : 'No messages yet',
+        usecase: usecase || 'basic_chat',
       };
       if (idx >= 0) {
         state.threads[idx] = { ...state.threads[idx], ...item };
@@ -851,21 +1284,33 @@
       }
 
       state.threads.forEach(thread => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center gap-1';
+
         const btn = document.createElement('button');
-        btn.className = 'w-full text-left px-3 py-2 rounded-md hover:bg-slate-800/70 text-sm text-slate-400 truncate';
+        btn.className = 'flex-1 text-left px-3 py-2 rounded-md bg-slate-800/40 hover:bg-slate-800/70 text-sm text-slate-300 truncate border border-slate-700/30';
         btn.textContent = thread.title;
         btn.title = thread.title;
-        btn.addEventListener('click', () => {
-          state.conversationId = thread.id;
-          state.threadTitle = thread.title;
-          namespaceTag.textContent = `Namespace: ${state.conversationId}`;
-          currentThreadLabel.textContent = state.threadTitle;
-          renderConversationMessages(state.conversationId);
-          savePersistentState();
-          activate('chat');
+        btn.addEventListener('click', async () => {
+          await openThread(thread);
         });
-        recentThreadsList.appendChild(btn);
+
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'shrink-0 rounded-md border border-rose-700/70 bg-rose-950/50 px-2 py-1 text-[10px] text-rose-300 hover:bg-rose-900/60';
+        del.innerHTML = '<i data-lucide="trash-2" class="w-3.5 h-3.5"></i>';
+        del.title = 'Delete conversation';
+        del.addEventListener('click', async (event) => {
+          event.stopPropagation();
+          await handleDeleteConversation(thread.id);
+        });
+
+        item.appendChild(btn);
+        item.appendChild(del);
+        recentThreadsList.appendChild(item);
       });
+
+      lucide.createIcons();
     }
 
     function getMessageContainerByUsecase(usecase) {
@@ -944,63 +1389,10 @@
       const responseText = payload.answer || payload.response || payload.final_response || '';
       const data = parseRichResponse(responseText);
       const kind = payload.kind || payload.response_data?.kind || (usecase === 'document_qa' ? 'document_qa' : 'chat');
-      const sources = Array.isArray(payload.sources)
-        ? payload.sources
-        : Array.isArray(payload.response_data?.sources)
-          ? payload.response_data.sources
-          : [];
-      const sections = Array.isArray(payload.sections)
-        ? payload.sections
-        : Array.isArray(payload.response_data?.sections)
-          ? payload.response_data.sections
-          : data.sections;
-      const artifacts = extractArtifacts(responseText);
       const box = document.createElement('div');
       box.className = kind === 'document_qa'
-        ? 'message-bot vision-card rounded-2xl rounded-tl-md p-4 max-w-[96%] shadow-sm'
-        : 'message-bot glass rounded-2xl rounded-tl-md p-4 max-w-[95%] shadow-sm';
-
-      const stageButtons = sections.length
-        ? sections.map((section, index) => `
-            <button class="vision-tab px-3 py-1.5 rounded-lg border text-xs font-semibold text-slate-600 hover:bg-slate-50" data-vision-stage="${index}">
-              ${escapeHtml(section.title)}
-            </button>
-          `).join('')
-        : '<span class="text-xs text-slate-500">No structured stages detected, showing raw answer only.</span>';
-
-      const stagePanels = sections.length
-        ? sections.map((section, index) => `
-            <div class="vision-panel rounded-xl p-3 ${index === 0 ? '' : 'hidden'}" data-vision-stage-panel="${index}">
-              <div class="text-[11px] uppercase tracking-wider font-semibold text-teal-700 mb-1">${escapeHtml(section.title)}</div>
-              <p class="m-0 text-sm leading-7 text-slate-700 whitespace-pre-line">${escapeHtml(section.body)}</p>
-            </div>
-          `).join('')
-        : '';
-
-      const sourceCards = sources.length
-        ? sources.map(source => {
-            const parts = [];
-            if (source.source) parts.push(source.source);
-            if (source.page !== undefined && source.page !== null) parts.push(`page ${source.page}`);
-            if (source.sheet) parts.push(`sheet ${source.sheet}`);
-            if (source.slide) parts.push(`slide ${source.slide}`);
-            if (source.chunk !== undefined && source.chunk !== null) parts.push(`chunk ${source.chunk}`);
-            const title = parts.join(' • ') || `Source ${source.rank || ''}`.trim();
-            return `
-              <div class="rounded-xl border border-slate-200 bg-white p-3">
-                <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-1">Source ${escapeHtml(String(source.rank || ''))}</div>
-                <div class="text-sm font-semibold text-slate-800">${escapeHtml(title)}</div>
-                ${source.preview ? `<div class="mt-1 text-xs text-slate-500 leading-5">${escapeHtml(source.preview)}</div>` : ''}
-              </div>
-            `;
-          }).join('')
-        : '<span class="text-xs text-slate-500">No source metadata returned.</span>';
-
-      const metaChips = [];
-      if (payload.model) metaChips.push(`Model: ${payload.model}`);
-      if (payload.provider) metaChips.push(`Provider: ${payload.provider}`);
-      if (payload.retrieved_chunks !== undefined) metaChips.push(`Chunks: ${payload.retrieved_chunks}`);
-      if (kind) metaChips.push(`Type: ${kind.replace(/_/g, ' ')}`);
+        ? 'message-bot vision-card compact-rich-card rounded-2xl rounded-tl-md p-4 max-w-[96%] shadow-sm'
+        : 'message-bot glass compact-rich-card rounded-2xl rounded-tl-md p-4 max-w-[95%] shadow-sm';
 
       box.innerHTML = `
         <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">${escapeHtml(kind === 'document_qa' ? 'Document QA' : payload.model ? `${kind.replace(/_/g, ' ')} - ${payload.model}` : kind.replace(/_/g, ' '))}</div>
@@ -1009,62 +1401,42 @@
             <div class="text-xs uppercase tracking-wider text-slate-500 mb-1">Interactive result</div>
             <p class="m-0 text-sm font-semibold text-slate-900">${escapeHtml(payload.question || payload.prompt || 'Assistant response')}</p>
           </div>
-          <button type="button" class="vision-copy-btn text-xs font-semibold px-3 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50">Copy answer</button>
+          <button type="button" class="vision-copy-btn text-xs font-semibold px-3 py-2 rounded-lg border border-slate-200 bg-slate-900/80 hover:bg-slate-800">Copy answer</button>
         </div>
 
-        <div class="grid md:grid-cols-[1.3fr_0.9fr] gap-3 mb-3">
-          <div class="vision-panel rounded-xl p-4">
-            <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-2">Summary</div>
-            <p class="m-0 text-sm leading-7 text-slate-700 whitespace-pre-line">${escapeHtml(payload.summary || data.summary || data.raw)}</p>
-          </div>
-          <div class="vision-panel rounded-xl p-4">
-            <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-2">Details</div>
-            <div class="space-y-2 text-sm text-slate-700">
-              <div class="flex items-center justify-between gap-3">
-                <span class="text-slate-500">Status</span>
-                <span class="font-semibold text-teal-700">${escapeHtml(payload.status || 'ok')}</span>
-              </div>
-              <div class="flex items-center justify-between gap-3">
-                <span class="text-slate-500">Model</span>
-                <span class="font-semibold text-slate-900 text-right">${escapeHtml(payload.model || 'auto-selected')}</span>
-              </div>
-              <div class="flex items-center justify-between gap-3">
-                <span class="text-slate-500">Sections</span>
-                <span class="font-semibold text-slate-900">${sections.length}</span>
+        <div class="vision-panel rounded-xl p-4" data-summary-card="true">
+          ${payload.kind === 'image_generation' && payload.images && Array.isArray(payload.images) && payload.images.length > 0 ? `
+            <div class="grid grid-cols-1 gap-4">
+              ${payload.images.map((imgUrl, idx) => `
+                <div class="relative group overflow-hidden rounded-lg border border-slate-300 bg-slate-100">
+                  <img src="${imgUrl}" class="w-full max-h-96 object-cover rounded-lg" alt="Generated image ${idx + 1}" />
+                  <button onclick="downloadImage('${imgUrl}', 'generated_image_${idx + 1}.png')" class="absolute top-2 right-2 bg-slate-800 hover:bg-slate-900 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="flex flex-wrap gap-2 mb-3">
+              <button type="button" class="vision-tab active px-3 py-1.5 rounded-lg border text-xs font-semibold text-slate-200" data-summary-view="summary">Summary</button>
+              <button type="button" class="vision-tab px-3 py-1.5 rounded-lg border text-xs font-semibold text-slate-200" data-summary-view="raw">Raw Content</button>
+            </div>
+
+            <div class="summary-view" data-summary-panel="summary">
+              <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-2">Summary</div>
+              <div class="summary-block">
+                <p class="m-0 text-sm leading-6 text-slate-700 whitespace-pre-line">${escapeHtml(payload.summary || data.summary || data.raw)}</p>
               </div>
             </div>
-            <div class="mt-3 flex flex-wrap gap-2">
-              ${metaChips.length ? metaChips.map(item => `<span class="tag bg-slate-50">${escapeHtml(item)}</span>`).join('') : '<span class="text-xs text-slate-500">No metadata</span>'}
+
+            <div class="summary-view hidden" data-summary-panel="raw">
+              <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-2">Raw Content</div>
+              <div class="summary-block">
+                <pre class="vision-raw mt-0 mb-0 text-xs leading-6 text-slate-700 whitespace-pre-wrap break-words">${escapeHtml(data.raw || responseText)}</pre>
+              </div>
             </div>
-          </div>
+          `}
         </div>
-
-        <div class="vision-panel rounded-xl p-4 mb-3">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-            <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500">Workflow stages</div>
-            <div class="flex flex-wrap gap-2">${stageButtons}</div>
-          </div>
-          <div class="space-y-3">
-            ${stagePanels || '<div class="text-sm text-slate-500">No structured stages extracted.</div>'}
-          </div>
-        </div>
-
-        ${kind === 'document_qa' ? `
-          <div class="vision-panel rounded-xl p-4 mb-3">
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <div class="text-[11px] uppercase tracking-wider font-semibold text-slate-500">Retrieved sources</div>
-              <div class="text-xs text-slate-500">${sources.length} matched chunk(s)</div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-3">
-              ${sourceCards}
-            </div>
-          </div>
-        ` : ''}
-
-        <details class="vision-panel rounded-xl p-4">
-          <summary class="cursor-pointer text-sm font-semibold text-slate-800">Show raw answer</summary>
-          <pre class="vision-raw mt-3 mb-0 text-xs leading-6 text-slate-700 whitespace-pre-wrap break-words">${escapeHtml(responseText)}</pre>
-        </details>
       `;
 
       container.appendChild(box);
@@ -1089,21 +1461,20 @@
         });
       }
 
-      const stageButtonsEls = box.querySelectorAll('[data-vision-stage]');
-      const stagePanelsEls = box.querySelectorAll('[data-vision-stage-panel]');
-      stageButtonsEls.forEach(button => {
-        button.addEventListener('click', () => {
-          const target = button.dataset.visionStage;
-          stageButtonsEls.forEach(item => item.classList.remove('active'));
-          stagePanelsEls.forEach(panel => panel.classList.add('hidden'));
-          button.classList.add('active');
-          const activePanel = box.querySelector(`[data-vision-stage-panel="${target}"]`);
-          if (activePanel) activePanel.classList.remove('hidden');
+      const summaryCard = box.querySelector('[data-summary-card="true"]');
+      if (summaryCard) {
+        const summaryTabs = summaryCard.querySelectorAll('[data-summary-view]');
+        const summaryPanels = summaryCard.querySelectorAll('[data-summary-panel]');
+        summaryTabs.forEach((button) => {
+          button.addEventListener('click', () => {
+            const target = button.dataset.summaryView;
+            summaryTabs.forEach((tab) => tab.classList.remove('active'));
+            summaryPanels.forEach((panel) => panel.classList.add('hidden'));
+            button.classList.add('active');
+            const activePanel = summaryCard.querySelector(`[data-summary-panel="${target}"]`);
+            if (activePanel) activePanel.classList.remove('hidden');
+          });
         });
-      });
-
-      if (stageButtonsEls[0]) {
-        stageButtonsEls[0].classList.add('active');
       }
 
       lucide.createIcons();
@@ -1117,9 +1488,17 @@
         if (persist) {
           const messages = getConversationMessages(state.conversationId);
           messages.push({ role, content, badge: badge || 'Assistant', usecase, at: Date.now() });
-          upsertThread(state.conversationId, state.threadTitle);
+          upsertThread(state.conversationId, state.threadTitle, usecase);
           renderHistoryPanel();
           savePersistentState();
+          
+          // Save to backend
+          if (state.token) {
+            const contentStr = typeof content === 'object' 
+              ? JSON.stringify(content) 
+              : String(content);
+            saveMessageToBackend(state.conversationId, role, contentStr);
+          }
         }
         return;
       }
@@ -1146,18 +1525,22 @@
       if (persist) {
         const messages = getConversationMessages(state.conversationId);
         messages.push({ role, content, badge: badge || 'Assistant', usecase, at: Date.now() });
-        upsertThread(state.conversationId, state.threadTitle);
+        upsertThread(state.conversationId, state.threadTitle, usecase);
         renderHistoryPanel();
         savePersistentState();
+        
+        // Save to backend
+        if (state.token) {
+          saveMessageToBackend(state.conversationId, role, String(content));
+        }
       }
 
       lucide.createIcons();
     }
 
     function shouldUseRichCardForPrompt(promptText, usecase) {
-      if (usecase === 'document_qa' || usecase === 'multi_agent') return true;
       const text = String(promptText || '').toLowerCase();
-      return /\b(summary|summarize|overview|highlights|brief)\b/.test(text);
+      return /\b(summary|summarize|summarise|overview|highlights|brief)\b/.test(text);
     }
 
     function setVoiceStatus(text, tone = 'normal') {
@@ -1322,9 +1705,9 @@
       }
     }
 
-    function resetThread() {
-      state.conversationId = `conv_${Date.now()}`;
-      state.threadTitle = 'New Conversation';
+    function resetThread(conversationId = null, threadTitle = 'New Conversation') {
+      state.conversationId = conversationId || `conv_${Date.now()}`;
+      state.threadTitle = threadTitle || 'New Conversation';
       namespaceTag.textContent = `Namespace: ${state.conversationId}`;
       currentThreadLabel.textContent = state.threadTitle;
       uploadedFileName.textContent = 'No file uploaded';
@@ -1351,12 +1734,24 @@
       state.token = '';
       localStorage.removeItem('agentic_token');
       signedInAs.textContent = 'logged out';
+      if (signedInAsInline) signedInAsInline.textContent = 'logged out';
+      updateProfileAvatar('logged out');
       goAuth(true);
     });
 
-    newThreadBtn.addEventListener('click', () => {
+    newThreadBtn.addEventListener('click', async () => {
+      // Create conversation on backend if user is authenticated
+      if (state.token) {
+        const conv = await createConversationOnBackend('New Conversation');
+        if (conv) {
+          resetThread(conv.id, conv.title || 'New Conversation');
+          appendMessage('assistant', `Started new conversation: ${state.conversationId}`, 'Conversation Started');
+          return;
+        }
+      }
+      
       resetThread();
-      appendMessage('assistant', `Started new thread: ${state.conversationId}`, 'Thread Reset');
+      appendMessage('assistant', `Started new conversation: ${state.conversationId}`, 'Conversation Started');
     });
 
     providerSelect.addEventListener('change', () => {
@@ -1653,6 +2048,118 @@
         sendBtn.click();
       }
     });
+
+    // ── Image Generation Handlers ────────────────────────────
+    generateImageBtn.addEventListener('click', () => {
+      imageGenPanel.classList.toggle('hidden');
+      if (!imageGenPanel.classList.contains('hidden')) {
+        imageGenPrompt.focus();
+        lucide.createIcons();
+      }
+    });
+
+    cancelImageGenBtn.addEventListener('click', () => {
+      imageGenPanel.classList.add('hidden');
+      imageGenPrompt.value = '';
+      imageGenError.classList.add('hidden');
+      imageGenResult.classList.add('hidden');
+      generatedImagesList.innerHTML = '';
+    });
+
+    generateImageConfirmBtn.addEventListener('click', async () => {
+      const prompt = (imageGenPrompt.value || '').trim();
+      const model = imageGenModelSelect.value;
+
+      if (!prompt) {
+        imageGenError.textContent = 'Please enter an image description';
+        imageGenError.classList.remove('hidden');
+        return;
+      }
+
+      if (!state.token) {
+        imageGenError.textContent = 'Please login first before generating images';
+        imageGenError.classList.remove('hidden');
+        return;
+      }
+
+      // Show loading, hide errors and results
+      imageGenLoading.classList.remove('hidden');
+      imageGenError.classList.add('hidden');
+      imageGenResult.classList.add('hidden');
+      generatedImagesList.innerHTML = '';
+      generateImageConfirmBtn.disabled = true;
+
+      try {
+        const res = await fetch('/api/v1/chat/image-generation/generate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${state.token}`,
+          },
+          body: JSON.stringify({
+            prompt: prompt,
+            model: model,
+            height: 768,
+            width: 768,
+          }),
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.detail || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        if (!data.success || !data.images || data.images.length === 0) {
+          throw new Error(data.error || 'No images generated');
+        }
+
+        // Display images in preview panel
+        generatedImagesList.innerHTML = '';
+        data.images.forEach((imgUrl, idx) => {
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'relative group overflow-hidden rounded-lg border border-slate-300 bg-slate-200';
+          imgContainer.style.height = '120px';
+          imgContainer.innerHTML = `
+            <img src="${imgUrl}" class="w-full h-full object-cover rounded-lg cursor-pointer hover:shadow-md transition-shadow" alt="Generated image ${idx + 1}" title="Click to download" />
+            <button onclick="downloadImage('${imgUrl}', 'generated_image_${idx + 1}.png')" class="absolute top-1 right-1 bg-slate-800 hover:bg-slate-900 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="download" class="w-3 h-3"></i>
+            </button>
+          `;
+          generatedImagesList.appendChild(imgContainer);
+        });
+
+        // Add to chat with images
+        appendMessage('assistant', {
+          kind: 'image_generation',
+          prompt: prompt,
+          images: data.images,
+          model: model,
+          response: `Generated ${data.images.length} image(s) from: "${prompt}"`
+        }, 'Image Generation', state.usecase);
+        
+        imageGenResult.classList.remove('hidden');
+        imageGenLoading.classList.add('hidden');
+
+        lucide.createIcons();
+      } catch (err) {
+        imageGenError.textContent = `Error: ${err.message}`;
+        imageGenError.classList.remove('hidden');
+        imageGenLoading.classList.add('hidden');
+      } finally {
+        generateImageConfirmBtn.disabled = false;
+      }
+    });
+
+    // Helper function to download image
+    window.downloadImage = function(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || 'generated-image.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
 
     document.querySelectorAll('[data-quick-prompt]').forEach((button) => {
       button.addEventListener('click', () => {

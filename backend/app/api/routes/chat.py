@@ -324,3 +324,66 @@ async def ask_about_image(
         if isinstance(e, HTTPException):
             raise e
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ── Image Generation (Pollinations - Free, no API key) ───────────────────
+
+
+class ImageGenerationRequest(BaseModel):
+    prompt: str
+    model: str = "pollinations"
+    height: int = 768
+    width: int = 768
+
+
+@router.get("/image-generation/models")
+async def get_image_generation_models(token: str = Depends(oauth2_scheme)):
+    """Get available free image generation models"""
+    from app.services.image_generation_service import AVAILABLE_MODELS
+    verify_access_token(token)
+    return {
+        "models": AVAILABLE_MODELS,
+        "provider": "pollinations",
+        "free_tier": True
+    }
+
+
+@router.post("/image-generation/generate")
+async def generate_image(
+    request: ImageGenerationRequest,
+    token: str = Depends(oauth2_scheme)
+):
+    """
+    Generate an image using Pollinations (free, no API key)
+    """
+    from app.services.image_generation_service import get_available_models, generate_image
+
+    # Verify user
+    verify_access_token(token)
+
+    if not request.prompt or not request.prompt.strip():
+        raise HTTPException(status_code=400, detail="Prompt cannot be empty")
+
+    if len(request.prompt) > 1000:
+        raise HTTPException(status_code=400, detail="Prompt too long (max 1000 characters)")
+
+    # Generate image
+    result = await generate_image(
+        prompt=request.prompt,
+        model_key=request.model,
+        height=request.height,
+        width=request.width,
+    )
+
+    if not result["success"]:
+        raise HTTPException(
+            status_code=400,
+            detail=result.get("error", "Image generation failed")
+        )
+
+    return {
+        "success": True,
+        "images": result["image_urls"],
+        "prompt": request.prompt,
+        "model": request.model,
+    }

@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from app.core.config import settings
 from app.db.database import create_tables
-from app.api.routes import auth, health, chat
+from app.api.routes import auth, health, chat, chat_history
 from app.services.redis.redis_services import redis_service  # add import
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -41,9 +41,10 @@ app.add_middleware(
 )
 
 # ── Routers ───────────────────────────────────────
-app.include_router(auth.router,   prefix="/api/v1")
+app.include_router(auth.router,          prefix="/api/v1")
 app.include_router(health.router)
-app.include_router(chat.router,   prefix="/api/v1/chat",  tags=["Chat"])
+app.include_router(chat.router,          prefix="/api/v1/chat",  tags=["Chat"])
+app.include_router(chat_history.router,  prefix="/api/v1/chat",  tags=["Chat History"])
 
 
 @app.get("/")
