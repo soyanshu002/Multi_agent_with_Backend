@@ -1,17 +1,19 @@
-FROM python:3.10-slim
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy the Figma HTML files to
+# the Nginx default web hosting directory
+COPY figma_mock /usr/share/nginx/html
 
-# Copy requirements and install
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Configure Nginx to listen on port 8501 (to match the old Streamlit setup)
+# and set the default page to the Auth screen!
+RUN echo 'server { \
+    listen 8501; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index agentic_hub_auth.html index.html index.htm; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
 
-# Copy frontend code
-COPY . .
+EXPOSE 8501
 
-# Environment variables (provided at runtime)
-ENV PORT=8501
-ENV BACKEND_URL=http://backend:8000
-
-# Start command
-CMD streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+CMD ["nginx", "-g", "daemon off;"]
