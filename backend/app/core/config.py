@@ -1,5 +1,10 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from pathlib import Path
+
+
+BACKEND_DIR = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = BACKEND_DIR.parent
 
 
 class Settings(BaseSettings):
@@ -103,7 +108,7 @@ class Settings(BaseSettings):
     LANGCHAIN_PROJECT: str = "multi-agent-chatbot"
 
     class Config:
-        env_file = ".env"
+        env_file = (str(BACKEND_DIR / ".env"), str(PROJECT_ROOT / ".env"))
         env_file_encoding = "utf-8"
         extra = "ignore"
 

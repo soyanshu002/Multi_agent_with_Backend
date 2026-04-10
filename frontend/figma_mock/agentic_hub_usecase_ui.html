@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smruti AgentX - Usecase UI Prototype</title>
+  <title>Smruti AgentX - Final Workspace</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,17 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f2f6f9;
-      --sidebar: #111827;
-      --sidebar-soft: #1b2433;
-      --panel: #ffffff;
-      --line: #d9e2ec;
-      --ink: #0f172a;
-      --muted: #64748b;
+      --bg: #0b1220;
+      --sidebar: #070f1d;
+      --sidebar-soft: #111b2e;
+      --panel: #101a2b;
+      --line: #223247;
+      --ink: #e2e8f0;
+      --muted: #93a4ba;
       --brand: #0f766e;
-      --brand-soft: #ccfbf1;
+      --brand-soft: #0f3f3d;
       --accent: #ea580c;
-      --accent-soft: #ffedd5;
+      --accent-soft: #4a2b14;
       --ok: #16a34a;
     }
 
@@ -29,8 +29,8 @@
     html, body { margin: 0; height: 100%; }
     body {
       font-family: 'Sora', sans-serif;
-      background: radial-gradient(circle at 15% 0%, #d9f7f2 0%, transparent 28%),
-                  radial-gradient(circle at 90% 20%, #fff1db 0%, transparent 22%),
+      background: radial-gradient(circle at 15% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 28%),
+                  radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.09) 0%, transparent 22%),
                   var(--bg);
       color: var(--ink);
     }
@@ -38,13 +38,13 @@
     .mono { font-family: 'Manrope', sans-serif; }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-thumb { background: #9fb3c8; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #3a4a62; border-radius: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
 
     .glass {
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(16, 26, 43, 0.86);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(100, 116, 139, 0.38);
     }
 
     .message-bot { border-left: 3px solid var(--brand); }
@@ -64,17 +64,17 @@
 
     .tag {
       border: 1px solid var(--line);
-      background: #fff;
+      background: rgba(15, 23, 42, 0.78);
       border-radius: 999px;
       padding: 0.2rem 0.7rem;
       font-size: 0.72rem;
-      color: #334155;
+      color: #cbd5e1;
       white-space: nowrap;
     }
 
     .vision-card {
-      border: 1px solid #bfdbfe;
-      background: linear-gradient(180deg, rgba(239, 246, 255, 0.95), rgba(255, 255, 255, 0.98));
+      border: 1px solid #294768;
+      background: linear-gradient(180deg, rgba(15, 29, 51, 0.95), rgba(13, 24, 42, 0.98));
     }
 
     .vision-tab.active {
@@ -84,13 +84,108 @@
     }
 
     .vision-panel {
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(100, 116, 139, 0.4);
+      background: rgba(15, 23, 42, 0.72);
     }
 
     .vision-raw {
       max-height: 22rem;
       overflow: auto;
+    }
+
+    .pulse-banner {
+      border: 1px solid #2a3f5a;
+      background: linear-gradient(90deg, rgba(15, 34, 52, 0.95), rgba(36, 30, 20, 0.96));
+      border-radius: 14px;
+      padding: 0.72rem 0.9rem;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.55rem;
+    }
+
+    .quick-tile {
+      border: 1px solid #2a3f5a;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.84);
+      padding: 0.62rem 0.68rem;
+      font-size: 0.76rem;
+      color: #cbd5e1;
+    }
+
+    .mobile-top {
+      background: rgba(11, 18, 32, 0.95) !important;
+      border-color: #223247 !important;
+      color: #e2e8f0;
+    }
+
+    .mobile-top p,
+    .mobile-top i {
+      color: #e2e8f0 !important;
+    }
+
+    /* Dark overrides for utility classes used in the markup */
+    .bg-white,
+    .bg-white\/85,
+    .bg-white\/60,
+    .bg-white\/70 {
+      background-color: rgba(16, 26, 43, 0.9) !important;
+    }
+
+    .border-slate-200,
+    .border-teal-100,
+    .border-teal-200,
+    .border-amber-100 {
+      border-color: #2a3f5a !important;
+    }
+
+    .text-slate-900,
+    .text-slate-800,
+    .text-slate-700,
+    .text-slate-600,
+    .text-slate-500 {
+      color: #cbd5e1 !important;
+    }
+
+    .bg-teal-50 {
+      background-color: rgba(13, 60, 56, 0.55) !important;
+    }
+
+    .text-teal-800 {
+      color: #5eead4 !important;
+    }
+
+    .message-bot {
+      background: rgba(16, 26, 43, 0.92) !important;
+    }
+
+    .message-user {
+      background: rgba(18, 34, 60, 0.9) !important;
+      color: #e2e8f0 !important;
+      border-color: #31507a !important;
+    }
+
+    #promptInput {
+      color: #f8fafc;
+      background: transparent;
+    }
+
+    #promptInput::placeholder {
+      color: #a5b4c7;
+    }
+
+    #liveTranscript {
+      color: #93c5fd !important;
+    }
+
+    .message-bot p,
+    .message-bot div,
+    .vision-panel p,
+    .vision-panel div,
+    .vision-panel span {
+      color: #e2e8f0 !important;
     }
 
     .brand-mark {
@@ -172,6 +267,7 @@
       .layout { grid-template-columns: 1fr; }
       .sidebar { display: none; }
       .mobile-top { display: flex; }
+      .quick-grid { grid-template-columns: 1fr; }
     }
 
     @media (min-width: 981px) {
@@ -270,11 +366,6 @@
               <option value="mixtral-8x7b-32768">mixtral-8x7b-32768</option>
             </select>
           </span>
-          <span class="tag">Audio: STT + TTS enabled</span>
-        </div>
-        <div id="healthBadge" class="text-sm text-[var(--ok)] font-semibold flex items-center gap-1.5 shrink-0">
-          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-          Systems Operational
         </div>
       </header>
 
@@ -290,10 +381,32 @@
       </section>
 
       <section class="flex-1 overflow-y-auto px-4 md:px-8 pb-5 pt-4">
+        <div class="mx-auto max-w-4xl mb-4 pulse-banner">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="text-sm text-slate-700"><strong>New in this build:</strong> improved account isolation, richer response cards, and smoother voice/image flow.</div>
+            <span class="tag">Release: April 2026</span>
+          </div>
+        </div>
+
         <div class="mx-auto max-w-4xl space-y-4" id="view-chat">
           <div class="message-bot glass rounded-2xl rounded-tl-md p-4 max-w-[90%] border border-teal-100 shadow-sm">
-            <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">Connected Prototype</div>
-            <p class="m-0 text-sm leading-7 text-slate-700">Login from sidebar, then send a message from composer below. This UI now calls your FastAPI backend endpoints directly.</p>
+            <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">Connected Workspace</div>
+            <p class="m-0 text-sm leading-7 text-slate-700">Login from sidebar, then send a message from composer below. This workspace now includes cleaner cards, thread isolation, and improved auth handoff.</p>
+          </div>
+
+          <div class="quick-grid">
+            <button class="quick-tile text-left" data-quick-prompt="Summarize the current project architecture and key services.">
+              <div class="font-semibold text-slate-800">Project Summary</div>
+              <div class="mt-1">Get a compact overview of backend and frontend flow.</div>
+            </button>
+            <button class="quick-tile text-left" data-quick-prompt="Explain document QA flow from upload to answer generation.">
+              <div class="font-semibold text-slate-800">Document QA Walkthrough</div>
+              <div class="mt-1">Ask how Pinecone indexing and retrieval works.</div>
+            </button>
+            <button class="quick-tile text-left" data-quick-prompt="List open risks and deployment checks before production rollout.">
+              <div class="font-semibold text-slate-800">Deployment Checklist</div>
+              <div class="mt-1">Generate pre-release validation steps.</div>
+            </button>
           </div>
         </div>
 
@@ -359,10 +472,7 @@
         <div class="mx-auto max-w-4xl hidden" id="view-history">
           <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
             <p class="m-0 text-sm text-slate-700 font-semibold">Recent Conversation History</p>
-            <div class="mt-3 space-y-2 text-sm text-slate-600">
-              <div class="rounded-lg border border-slate-200 p-3">Q3_Financial_Report.pdf summary thread</div>
-              <div class="rounded-lg border border-slate-200 p-3">API design planning thread</div>
-            </div>
+            <div id="historyList" class="mt-3 space-y-2 text-sm text-slate-600"></div>
           </div>
         </div>
       </section>
@@ -372,11 +482,9 @@
           <div class="px-4 py-2.5 bg-teal-50 border-b border-teal-100 flex items-center justify-between gap-2 text-xs">
             <div class="flex items-center gap-2 text-slate-700">
               <i data-lucide="mic" class="w-4 h-4 text-teal-700"></i>
-              <span id="voiceStatusText">Voice ready • Browser STT/TTS</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="px-2 py-1 rounded-full bg-orange-100 text-orange-800">Browser Speech Recognition</span>
-              <span class="px-2 py-1 rounded-full bg-teal-100 text-teal-800">Browser Speech Synthesis</span>
+             
             </div>
           </div>
           <div class="p-2 flex items-end gap-2">
@@ -431,13 +539,13 @@
     const sendBtn = document.getElementById('sendBtn');
     const voiceStatusText = document.getElementById('voiceStatusText');
     const liveTranscript = document.getElementById('liveTranscript');
-    const healthBadge = document.getElementById('healthBadge');
     const modeTag = document.getElementById('modeTag');
     const uploadedFileName = document.getElementById('uploadedFileName');
     const uploadStateText = document.getElementById('uploadStateText');
     const namespaceTag = document.getElementById('namespaceTag');
     const currentThreadLabel = document.getElementById('currentThreadLabel');
     const recentThreadsList = document.getElementById('recentThreadsList');
+    const historyList = document.getElementById('historyList');
     const chatView = document.getElementById('view-chat');
     const ragMessages = document.getElementById('ragMessages');
     const multiMessages = document.getElementById('multiMessages');
@@ -451,6 +559,168 @@
     let sttBasePrompt = '';
     let pendingImageFile = null;
 
+    const INITIAL_CHAT_HTML = `
+      <div class="message-bot glass rounded-2xl rounded-tl-md p-4 max-w-[90%] border border-teal-100 shadow-sm">
+        <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">Connected Workspace</div>
+        <p class="m-0 text-sm leading-7 text-slate-700">Login from sidebar, then send a message from composer below. This UI now calls your FastAPI backend endpoints directly.</p>
+      </div>
+    `;
+
+    const STORAGE_PREFIX = 'agentx_ui_state_v2';
+
+    function getStorageKey(identity) {
+      const safeIdentity = String(identity || 'guest').toLowerCase().replace(/[^a-z0-9_.-]/g, '_');
+      return `${STORAGE_PREFIX}:${safeIdentity}`;
+    }
+
+    function decodeJwtPayload(token) {
+      try {
+        const parts = String(token || '').split('.');
+        if (parts.length < 2) return null;
+        const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), '=');
+        const json = atob(padded);
+        return JSON.parse(json);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function currentIdentityHint() {
+      const payload = decodeJwtPayload(state.token);
+      return payload?.sub || payload?.email || 'guest';
+    }
+
+    state.storageIdentity = currentIdentityHint();
+    state.storageKey = getStorageKey(state.storageIdentity);
+
+    function loadPersistentState() {
+      try {
+        const raw = localStorage.getItem(state.storageKey);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed.threads)) {
+          state.threads = parsed.threads.slice(0, 20);
+        }
+        if (parsed.messagesByConversation && typeof parsed.messagesByConversation === 'object') {
+          state.messagesByConversation = parsed.messagesByConversation;
+        }
+        if (parsed.conversationId) {
+          state.conversationId = parsed.conversationId;
+        }
+        if (parsed.threadTitle) {
+          state.threadTitle = parsed.threadTitle;
+        }
+      } catch (error) {
+        // ignore corrupted local state
+      }
+    }
+
+    function savePersistentState() {
+      try {
+        const payload = {
+          threads: state.threads.slice(0, 20),
+          messagesByConversation: state.messagesByConversation || {},
+          conversationId: state.conversationId,
+          threadTitle: state.threadTitle,
+        };
+        localStorage.setItem(state.storageKey, JSON.stringify(payload));
+      } catch (error) {
+        // local storage may be unavailable in private mode
+      }
+    }
+
+    function switchPersistentStateForUser(identity) {
+      state.storageIdentity = identity || 'guest';
+      state.storageKey = getStorageKey(state.storageIdentity);
+
+      state.conversationId = `conv_${Date.now()}`;
+      state.threadTitle = 'New Conversation';
+      state.threads = [];
+      state.messagesByConversation = {};
+
+      loadPersistentState();
+      namespaceTag.textContent = `Namespace: ${state.conversationId}`;
+      currentThreadLabel.textContent = state.threadTitle;
+      getConversationMessages(state.conversationId);
+      upsertThread(state.conversationId, state.threadTitle);
+      renderRecentThreads();
+      renderHistoryPanel();
+      renderConversationMessages(state.conversationId);
+      savePersistentState();
+    }
+
+    function getConversationMessages(conversationId) {
+      if (!state.messagesByConversation) {
+        state.messagesByConversation = {};
+      }
+      if (!Array.isArray(state.messagesByConversation[conversationId])) {
+        state.messagesByConversation[conversationId] = [];
+      }
+      return state.messagesByConversation[conversationId];
+    }
+
+    function ensureThreadTitle(seedText) {
+      if (state.threadTitle !== 'New Conversation') return;
+      state.threadTitle = summarizeTitle(seedText);
+      currentThreadLabel.textContent = state.threadTitle;
+      upsertThread(state.conversationId, state.threadTitle);
+      renderRecentThreads();
+      renderHistoryPanel();
+      savePersistentState();
+    }
+
+    function renderHistoryPanel() {
+      historyList.innerHTML = '';
+      if (!state.threads.length) {
+        historyList.innerHTML = '<div class="rounded-lg border border-slate-200 p-3 text-slate-500">No saved conversations yet.</div>';
+        return;
+      }
+
+      const sorted = [...state.threads].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+      sorted.forEach(thread => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'w-full text-left rounded-lg border border-slate-200 p-3 hover:bg-slate-50';
+        const preview = thread.preview || 'No messages yet';
+        const when = thread.updatedAt ? new Date(thread.updatedAt).toLocaleString() : '';
+        row.innerHTML = `
+          <div class="font-semibold text-slate-800 truncate">${escapeHtml(thread.title || 'New Conversation')}</div>
+          <div class="text-xs text-slate-500 mt-1 truncate">${escapeHtml(preview)}</div>
+          <div class="text-[11px] text-slate-400 mt-1">${escapeHtml(when)}</div>
+        `;
+        row.addEventListener('click', () => {
+          state.conversationId = thread.id;
+          state.threadTitle = thread.title || 'New Conversation';
+          namespaceTag.textContent = `Namespace: ${state.conversationId}`;
+          currentThreadLabel.textContent = state.threadTitle;
+          renderConversationMessages(state.conversationId);
+          savePersistentState();
+          activate('chat');
+        });
+        historyList.appendChild(row);
+      });
+    }
+
+    function renderConversationMessages(conversationId) {
+      const messages = getConversationMessages(conversationId);
+      chatView.innerHTML = '';
+      ragMessages.innerHTML = '';
+      multiMessages.innerHTML = '';
+
+      if (!messages.length) {
+        chatView.innerHTML = INITIAL_CHAT_HTML;
+        return;
+      }
+
+      messages.forEach(entry => {
+        appendMessage(entry.role, entry.content, entry.badge, entry.usecase || 'basic_chat', { persist: false });
+      });
+    }
+
+    namespaceTag.textContent = `Namespace: ${state.conversationId}`;
+    state.messagesByConversation = {};
+    loadPersistentState();
     namespaceTag.textContent = `Namespace: ${state.conversationId}`;
 
     async function loadProvidersAndModels() {
@@ -502,9 +772,10 @@
       authStatus.className = state.token ? 'm-0 text-[11px] text-emerald-400' : 'm-0 text-[11px] text-rose-400';
     }
 
-    function goAuth() {
-      const next = encodeURIComponent('/ui-prototype');
-      window.location.href = `/ui-auth?next=${next}`;
+    function goAuth(logout = false) {
+      const next = encodeURIComponent('/ui-final');
+      const logoutParam = logout ? '&logout=1' : '';
+      window.location.href = `/ui-auth?next=${next}${logoutParam}`;
     }
 
     async function loadUserProfile() {
@@ -526,6 +797,10 @@
         }
         const profile = await res.json();
         signedInAs.textContent = profile.email || 'user';
+        const identity = profile.id || profile.email || currentIdentityHint();
+        if (identity && String(identity) !== String(state.storageIdentity)) {
+          switchPersistentStateForUser(identity);
+        }
         setAuthStatus();
       } catch (err) {
         signedInAs.textContent = 'unknown';
@@ -542,14 +817,27 @@
 
     function upsertThread(threadId, title) {
       const idx = state.threads.findIndex(t => t.id === threadId);
-      const item = { id: threadId, title: title || 'New Conversation', updatedAt: Date.now() };
+      const msgs = getConversationMessages(threadId);
+      const latest = msgs.length ? msgs[msgs.length - 1] : null;
+      const previewText = latest
+        ? (typeof latest.content === 'string'
+            ? latest.content
+            : (latest.content?.summary || latest.content?.answer || latest.content?.response || ''))
+        : '';
+      const item = {
+        id: threadId,
+        title: title || 'New Conversation',
+        updatedAt: Date.now(),
+        preview: previewText ? shortenText(previewText, 80) : 'No messages yet',
+      };
       if (idx >= 0) {
         state.threads[idx] = { ...state.threads[idx], ...item };
       } else {
         state.threads.unshift(item);
       }
       state.threads.sort((a, b) => b.updatedAt - a.updatedAt);
-      state.threads = state.threads.slice(0, 10);
+      state.threads = state.threads.slice(0, 20);
+      savePersistentState();
     }
 
     function renderRecentThreads() {
@@ -572,6 +860,8 @@
           state.threadTitle = thread.title;
           namespaceTag.textContent = `Namespace: ${state.conversationId}`;
           currentThreadLabel.textContent = state.threadTitle;
+          renderConversationMessages(state.conversationId);
+          savePersistentState();
           activate('chat');
         });
         recentThreadsList.appendChild(btn);
@@ -819,9 +1109,18 @@
       lucide.createIcons();
     }
 
-    function appendMessage(role, content, badge, usecase = state.usecase) {
+    function appendMessage(role, content, badge, usecase = state.usecase, options = {}) {
+      const { persist = true } = options;
+
       if (role === 'assistant' && (typeof content === 'object' || badge === 'Vision')) {
         renderAssistantCard(typeof content === 'object' ? content : { response: content }, usecase);
+        if (persist) {
+          const messages = getConversationMessages(state.conversationId);
+          messages.push({ role, content, badge: badge || 'Assistant', usecase, at: Date.now() });
+          upsertThread(state.conversationId, state.threadTitle);
+          renderHistoryPanel();
+          savePersistentState();
+        }
         return;
       }
 
@@ -843,10 +1142,26 @@
       if (role === 'assistant' && content) {
         lastAssistantText = content;
       }
+
+      if (persist) {
+        const messages = getConversationMessages(state.conversationId);
+        messages.push({ role, content, badge: badge || 'Assistant', usecase, at: Date.now() });
+        upsertThread(state.conversationId, state.threadTitle);
+        renderHistoryPanel();
+        savePersistentState();
+      }
+
       lucide.createIcons();
     }
 
+    function shouldUseRichCardForPrompt(promptText, usecase) {
+      if (usecase === 'document_qa' || usecase === 'multi_agent') return true;
+      const text = String(promptText || '').toLowerCase();
+      return /\b(summary|summarize|overview|highlights|brief)\b/.test(text);
+    }
+
     function setVoiceStatus(text, tone = 'normal') {
+      if (!voiceStatusText) return;
       voiceStatusText.textContent = text;
       if (tone === 'error') {
         voiceStatusText.className = 'text-rose-600';
@@ -911,7 +1226,7 @@
         } else {
           liveTranscript.classList.add('hidden');
         }
-        if (!voiceStatusText.textContent.includes('error')) {
+        if (!voiceStatusText || !voiceStatusText.textContent.includes('error')) {
           setVoiceStatus('Voice captured and inserted into message box', 'normal');
         }
         lucide.createIcons();
@@ -1017,42 +1332,26 @@
 
       upsertThread(state.conversationId, state.threadTitle);
       renderRecentThreads();
-
-      chatView.innerHTML = `
-        <div class="message-bot glass rounded-2xl rounded-tl-md p-4 max-w-[90%] border border-teal-100 shadow-sm">
-          <div class="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider font-semibold text-teal-800 bg-teal-50 px-2 py-1 rounded-full mb-2">Connected Prototype</div>
-          <p class="m-0 text-sm leading-7 text-slate-700">New thread created. Login from sidebar, then send a message from composer below.</p>
-        </div>
-      `;
+      getConversationMessages(state.conversationId);
+      renderConversationMessages(state.conversationId);
+      renderHistoryPanel();
 
       activate('chat');
       promptInput.value = '';
       fileInput.value = '';
-      lucide.createIcons();
-    }
-
-    async function pingHealth() {
-      try {
-        const res = await fetch('/health');
-        if (!res.ok) throw new Error('health failed');
-        healthBadge.innerHTML = '<i data-lucide="check-circle-2" class="w-4 h-4"></i>Systems Operational';
-        healthBadge.className = 'text-sm text-emerald-600 font-semibold flex items-center gap-1.5 shrink-0';
-      } catch (e) {
-        healthBadge.innerHTML = '<i data-lucide="alert-triangle" class="w-4 h-4"></i>Backend Offline';
-        healthBadge.className = 'text-sm text-rose-600 font-semibold flex items-center gap-1.5 shrink-0';
-      }
+      savePersistentState();
       lucide.createIcons();
     }
 
     switchAuthBtn.addEventListener('click', () => {
-      goAuth();
+      goAuth(false);
     });
 
     logoutBtn.addEventListener('click', () => {
       state.token = '';
       localStorage.removeItem('agentic_token');
       signedInAs.textContent = 'logged out';
-      goAuth();
+      goAuth(true);
     });
 
     newThreadBtn.addEventListener('click', () => {
@@ -1259,6 +1558,7 @@
           return;
         }
         const question = prompt || 'Describe this image and answer based on visible details.';
+        ensureThreadTitle(question);
         appendMessage('user', `Image question: ${question}`, undefined, activeUsecase);
         promptInput.value = '';
         await sendVisionQuestion(question, activeUsecase);
@@ -1278,12 +1578,7 @@
         return;
       }
 
-      if (state.threadTitle === 'New Conversation') {
-        state.threadTitle = summarizeTitle(prompt);
-        currentThreadLabel.textContent = state.threadTitle;
-      }
-      upsertThread(state.conversationId, state.threadTitle);
-      renderRecentThreads();
+      ensureThreadTitle(prompt);
 
       
       appendMessage('user', prompt, undefined, activeUsecase);
@@ -1324,20 +1619,26 @@
         const data = await res.json();
         const reply = data.final_response || data.response || data.message || JSON.stringify(data);
         if (typingNode && typingNode.parentNode) typingNode.parentNode.removeChild(typingNode);
-        appendMessage('assistant', {
-          kind: data.response_data?.kind || activeUsecase,
-          response: reply,
-          answer: data.response_data?.answer || reply,
-          question: prompt,
-          prompt,
-          summary: data.response_data?.summary || reply,
-          sections: data.response_data?.sections || [],
-          sources: data.response_data?.sources || [],
-          provider: data.provider || state.provider,
-          model: data.model || state.model,
-          retrieved_chunks: data.response_data?.retrieved_chunks,
-          status: data.error ? 'error' : 'ok',
-        }, activeUsecase.replace('_', ' '), activeUsecase);
+        const renderRichCard = shouldUseRichCardForPrompt(prompt, activeUsecase);
+
+        if (renderRichCard) {
+          appendMessage('assistant', {
+            kind: data.response_data?.kind || activeUsecase,
+            response: reply,
+            answer: data.response_data?.answer || reply,
+            question: prompt,
+            prompt,
+            summary: data.response_data?.summary || reply,
+            sections: data.response_data?.sections || [],
+            sources: data.response_data?.sources || [],
+            provider: data.provider || state.provider,
+            model: data.model || state.model,
+            retrieved_chunks: data.response_data?.retrieved_chunks,
+            status: data.error ? 'error' : 'ok',
+          }, activeUsecase.replace('_', ' '), activeUsecase);
+        } else {
+          appendMessage('assistant', reply, 'Assistant', activeUsecase);
+        }
       } catch (err) {
         if (typingNode && typingNode.parentNode) typingNode.parentNode.removeChild(typingNode);
         appendMessage('assistant', 'Could not reach backend. Check if FastAPI is running.', 'Network Error', activeUsecase);
@@ -1353,13 +1654,23 @@
       }
     });
 
+    document.querySelectorAll('[data-quick-prompt]').forEach((button) => {
+      button.addEventListener('click', () => {
+        promptInput.value = button.getAttribute('data-quick-prompt') || '';
+        promptInput.focus();
+      });
+    });
+
     setAuthStatus();
-    pingHealth();
+    switchPersistentStateForUser(currentIdentityHint());
     loadUserProfile();
     loadProvidersAndModels();
+    getConversationMessages(state.conversationId);
     upsertThread(state.conversationId, state.threadTitle);
     currentThreadLabel.textContent = state.threadTitle;
     renderRecentThreads();
+    renderHistoryPanel();
+    renderConversationMessages(state.conversationId);
     activate('chat');
   </script>
 </body>

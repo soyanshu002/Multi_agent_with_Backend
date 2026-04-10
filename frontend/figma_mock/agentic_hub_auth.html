@@ -11,6 +11,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --brand: #0f766e;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #d4dce6;
+      --panel: #ffffff;
+    }
+
     .brand-mark {
       position: relative;
       width: 2.75rem;
@@ -81,6 +89,40 @@
                   radial-gradient(circle at 90% 20%, #fff1db 0%, transparent 28%),
                   #eef3f7;
     }
+
+    .feature-tile {
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      background: rgba(9, 20, 48, 0.55);
+      border-radius: 0.75rem;
+      padding: 0.72rem 0.78rem;
+    }
+
+    .feature-tile .kicker {
+      font-size: 0.67rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #93c5fd;
+      margin-bottom: 0.2rem;
+    }
+
+    .feature-tile .title {
+      font-size: 0.94rem;
+      color: #e2e8f0;
+    }
+
+    .subtle-field {
+      background: #eaf0fb;
+      border: 1px solid #c9d3e2;
+    }
+
+    .auth-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.22rem 0.58rem;
+      font-size: 0.7rem;
+      color: #475569;
+      background: #f8fafc;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -94,11 +136,29 @@
         </div>
       </div>
       <div class="mt-8 space-y-4 text-sm text-slate-300">
-        <div class="rounded-lg border border-slate-700 p-3">Basic Chat for general requests</div>
-        <div class="rounded-lg border border-slate-700 p-3">Document QA with Pinecone-backed retrieval</div>
-        <div class="rounded-lg border border-slate-700 p-3">Audio STT/TTS workflows</div>
+        <div class="feature-tile">
+          <div class="kicker">Primary</div>
+          <div class="title">Basic Chat for general requests</div>
+        </div>
+        <div class="feature-tile">
+          <div class="kicker">Knowledge</div>
+          <div class="title">Document QA with Pinecone-backed retrieval</div>
+        </div>
+        <div class="feature-tile">
+          <div class="kicker">Voice</div>
+          <div class="title">Audio STT/TTS workflows with low-latency playback</div>
+        </div>
+        <div class="feature-tile">
+          <div class="kicker">Multimodal</div>
+          <div class="title">Image Q&A support with model fallback resilience</div>
+        </div>
       </div>
-      <p class="mt-8 text-xs text-slate-500">Use your account to access chat, upload docs, and test all usecases.</p>
+      <div class="mt-7 flex flex-wrap gap-2">
+        <span class="auth-chip">Realtime Threads</span>
+        <span class="auth-chip">Supabase OAuth</span>
+        <span class="auth-chip">FastAPI + LangGraph</span>
+      </div>
+      <p class="mt-5 text-xs text-slate-500">Use your account to access chat, upload docs, voice, and all current usecases.</p>
     </section>
 
     <section class="rounded-2xl bg-white border border-slate-200 p-6 shadow-lg">
@@ -107,14 +167,26 @@
         <button id="tabSignup" class="px-3 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-700">Sign Up</button>
       </div>
 
+      <div class="mb-3 flex flex-wrap gap-2">
+        <span class="auth-chip">Secure session tokens</span>
+        <span class="auth-chip">Role-ready workspace</span>
+      </div>
+
       <div id="loginPanel" class="space-y-3">
         <div>
           <label class="text-xs text-slate-500">Email</label>
-          <input id="loginEmail" type="email" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="you@example.com" />
+          <input id="loginEmail" type="email" class="subtle-field w-full mt-1 rounded-lg border px-3 py-2 text-sm" placeholder="you@example.com" />
         </div>
         <div>
           <label class="text-xs text-slate-500">Password</label>
-          <input id="loginPassword" type="password" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="••••••••" />
+          <input id="loginPassword" type="password" class="subtle-field w-full mt-1 rounded-lg border px-3 py-2 text-sm" placeholder="••••••••" />
+        </div>
+        <div class="flex items-center justify-between text-xs text-slate-500">
+          <label class="inline-flex items-center gap-2">
+            <input id="rememberEmail" type="checkbox" class="rounded border-slate-300" />
+            Remember email
+          </label>
+          <button id="demoFillBtn" type="button" class="font-semibold text-teal-700 hover:text-teal-800">Use demo credentials</button>
         </div>
         <button id="loginBtn" class="w-full rounded-lg bg-teal-700 hover:bg-teal-800 text-white text-sm font-semibold py-2.5">Login</button>
       </div>
@@ -122,15 +194,15 @@
       <div id="signupPanel" class="space-y-3 hidden">
         <div>
           <label class="text-xs text-slate-500">Full name</label>
-          <input id="signupName" type="text" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="Your name" />
+          <input id="signupName" type="text" class="subtle-field w-full mt-1 rounded-lg border px-3 py-2 text-sm" placeholder="Your name" />
         </div>
         <div>
           <label class="text-xs text-slate-500">Email</label>
-          <input id="signupEmail" type="email" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="you@example.com" />
+          <input id="signupEmail" type="email" class="subtle-field w-full mt-1 rounded-lg border px-3 py-2 text-sm" placeholder="you@example.com" />
         </div>
         <div>
           <label class="text-xs text-slate-500">Password</label>
-          <input id="signupPassword" type="password" class="w-full mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" placeholder="••••••••" />
+          <input id="signupPassword" type="password" class="subtle-field w-full mt-1 rounded-lg border px-3 py-2 text-sm" placeholder="••••••••" />
         </div>
         <button id="signupBtn" class="w-full rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5">Create account</button>
       </div>
@@ -156,7 +228,8 @@
     lucide.createIcons();
 
     const params = new URLSearchParams(window.location.search);
-    const nextPath = params.get('next') || '/ui-prototype';
+    const nextPath = params.get('next') || '/ui-final';
+    const shouldLogout = params.get('logout') === '1';
 
     const tabLogin = document.getElementById('tabLogin');
     const tabSignup = document.getElementById('tabSignup');
@@ -167,6 +240,8 @@
     const loginEmail = document.getElementById('loginEmail');
     const loginPassword = document.getElementById('loginPassword');
     const loginBtn = document.getElementById('loginBtn');
+    const rememberEmail = document.getElementById('rememberEmail');
+    const demoFillBtn = document.getElementById('demoFillBtn');
 
     const signupName = document.getElementById('signupName');
     const signupEmail = document.getElementById('signupEmail');
@@ -204,6 +279,44 @@
       return supabaseClient;
     }
 
+    async function backendLogin(email, password) {
+      const body = new URLSearchParams();
+      body.append('username', email);
+      body.append('password', password);
+
+      const res = await fetch('/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || 'Login failed');
+      }
+
+      const data = await res.json();
+      localStorage.setItem('agentic_token', data.access_token || '');
+      window.location.href = nextPath;
+    }
+
+    async function backendRegister(full_name, email, password) {
+      const res = await fetch('/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, full_name })
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || 'Sign up failed');
+      }
+
+      const data = await res.json();
+      localStorage.setItem('agentic_token', data.access_token || '');
+      window.location.href = nextPath;
+    }
+
     async function exchangeSupabaseToken(accessToken) {
       const res = await fetch('/api/v1/auth/supabase/exchange', {
         method: 'POST',
@@ -239,6 +352,25 @@
       }
     }
 
+    async function handleExplicitLogoutIfRequested() {
+      localStorage.removeItem('agentic_token');
+      if (!shouldLogout) return false;
+
+      const client = getSupabaseClient();
+      if (client) {
+        try {
+          await client.auth.signOut();
+        } catch (err) {
+          // ignore signout errors and continue
+        }
+      }
+
+      authMessage.textContent = 'Logged out. You can sign in with another account now.';
+      authMessage.className = 'mt-4 text-sm text-emerald-700';
+      showLoginTab();
+      return true;
+    }
+
     function showLoginTab() {
       loginPanel.classList.remove('hidden');
       signupPanel.classList.add('hidden');
@@ -255,8 +387,33 @@
       authMessage.textContent = '';
     }
 
+    function loadRememberedEmail() {
+      const remembered = localStorage.getItem('agentic_remembered_email') || '';
+      if (remembered) {
+        loginEmail.value = remembered;
+        rememberEmail.checked = true;
+      }
+    }
+
+    function persistRememberedEmail() {
+      if (!rememberEmail.checked) {
+        localStorage.removeItem('agentic_remembered_email');
+        return;
+      }
+      const value = (loginEmail.value || '').trim();
+      if (value) {
+        localStorage.setItem('agentic_remembered_email', value);
+      }
+    }
+
     tabLogin.addEventListener('click', showLoginTab);
     tabSignup.addEventListener('click', showSignupTab);
+    demoFillBtn.addEventListener('click', () => {
+      loginEmail.value = 'demo@agentx.ai';
+      loginPassword.value = 'demo12345';
+      authMessage.textContent = 'Demo values inserted. Replace if needed.';
+      authMessage.className = 'mt-4 text-sm text-slate-600';
+    });
 
     loginBtn.addEventListener('click', async () => {
       const username = (loginEmail.value || '').trim();
@@ -269,41 +426,27 @@
 
       authMessage.textContent = 'Signing in...';
       authMessage.className = 'mt-4 text-sm text-slate-600';
+      persistRememberedEmail();
 
       try {
         const client = getSupabaseClient();
+
         if (client) {
           const { data, error } = await client.auth.signInWithPassword({
             email: username,
             password,
           });
-          if (error || !data?.session?.access_token) {
-            throw new Error(error?.message || 'Login failed');
+          if (!error && data?.session?.access_token) {
+            await exchangeSupabaseToken(data.session.access_token);
+            return;
           }
-          await exchangeSupabaseToken(data.session.access_token);
-          return;
+
+          // Fall back to backend login so email/password still works locally.
         }
-
-        const body = new URLSearchParams();
-        body.append('username', username);
-        body.append('password', password);
-
-        const res = await fetch('/api/v1/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body
-        });
-
-        if (!res.ok) {
-          const txt = await res.text();
-          throw new Error(txt || 'Login failed');
-        }
-
-        const data = await res.json();
-        localStorage.setItem('agentic_token', data.access_token || '');
-        window.location.href = nextPath;
+        await backendLogin(username, password);
       } catch (err) {
-        authMessage.textContent = 'Login failed. Check your credentials.';
+        const message = String(err?.message || '').trim();
+        authMessage.textContent = message || 'Login failed. Check your credentials.';
         authMessage.className = 'mt-4 text-sm text-rose-600';
       }
     });
@@ -324,6 +467,7 @@
 
       try {
         const client = getSupabaseClient();
+
         if (client) {
           const { data, error } = await client.auth.signUp({
             email,
@@ -336,37 +480,26 @@
           });
 
           if (error) {
-            throw new Error(error.message || 'Sign up failed');
-          }
+            // Fall back to backend registration when Supabase email sign up is unavailable.
+          } else {
+          loadRememberedEmail();
+            const accessToken = data?.session?.access_token;
+            if (accessToken) {
+              await exchangeSupabaseToken(accessToken);
+              return;
+            }
 
-          const accessToken = data?.session?.access_token;
-          if (accessToken) {
-            await exchangeSupabaseToken(accessToken);
+            authMessage.textContent = 'Account created. Please confirm email, then login.';
+            authMessage.className = 'mt-4 text-sm text-emerald-700';
+            showLoginTab();
             return;
           }
-
-          authMessage.textContent = 'Account created. Please confirm email, then login.';
-          authMessage.className = 'mt-4 text-sm text-emerald-700';
-          showLoginTab();
-          return;
         }
 
-        const res = await fetch('/api/v1/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, full_name })
-        });
-
-        if (!res.ok) {
-          const txt = await res.text();
-          throw new Error(txt || 'Sign up failed');
-        }
-
-        const data = await res.json();
-        localStorage.setItem('agentic_token', data.access_token || '');
-        window.location.href = nextPath;
+        await backendRegister(full_name, email, password);
       } catch (err) {
-        authMessage.textContent = 'Sign up failed. Email may already be registered.';
+        const message = String(err?.message || '').trim();
+        authMessage.textContent = message || 'Sign up failed. Email may already be registered.';
         authMessage.className = 'mt-4 text-sm text-rose-600';
       }
     });
@@ -401,6 +534,8 @@
 
     (async () => {
       await loadSupabaseConfig();
+      const handledLogout = await handleExplicitLogoutIfRequested();
+      if (handledLogout) return;
       await handleSupabaseSessionIfPresent();
     })();
   </script>

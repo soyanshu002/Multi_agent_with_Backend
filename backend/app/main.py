@@ -56,14 +56,19 @@ async def root():
     }
 
 
-@app.get("/ui-prototype")
-async def ui_prototype():
+@app.get("/ui-final")
+async def ui_final():
     if FIGMA_UI_FILE.exists():
         return FileResponse(str(FIGMA_UI_FILE))
     return {
-        "error": "UI prototype not found",
+        "error": "UI final workspace not found",
         "expected_path": str(FIGMA_UI_FILE)
     }
+
+
+@app.get("/ui-prototype")
+async def ui_prototype():
+    return await ui_final()
 
 
 @app.get("/ui-auth")
